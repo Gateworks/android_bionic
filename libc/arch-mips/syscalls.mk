@@ -119,6 +119,7 @@ syscall_src += arch-mips/syscalls/faccessat.S
 syscall_src += arch-mips/syscalls/symlink.S
 syscall_src += arch-mips/syscalls/fchdir.S
 syscall_src += arch-mips/syscalls/truncate.S
+syscall_src += arch-mips/syscalls/truncate64.S
 syscall_src += arch-mips/syscalls/setxattr.S
 syscall_src += arch-mips/syscalls/lsetxattr.S
 syscall_src += arch-mips/syscalls/getxattr.S
