@@ -116,6 +116,7 @@ syscall_src += arch-arm/syscalls/faccessat.S
 syscall_src += arch-arm/syscalls/symlink.S
 syscall_src += arch-arm/syscalls/fchdir.S
 syscall_src += arch-arm/syscalls/truncate.S
+syscall_src += arch-arm/syscalls/truncate64.S
 syscall_src += arch-arm/syscalls/setxattr.S
 syscall_src += arch-arm/syscalls/lsetxattr.S
 syscall_src += arch-arm/syscalls/getxattr.S
