@@ -21,8 +21,9 @@
 #include <linux/types.h>
 #include <linux/list.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#include <linux/rbtree.h>
 #include <linux/rcupdate.h>
-#include <asm/atomic.h>
-#endif
+#include <linux/sysctl.h>
+#include <linux/rwsem.h>
+#include <linux/atomic.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#endif

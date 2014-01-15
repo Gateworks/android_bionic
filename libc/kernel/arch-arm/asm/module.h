@@ -18,14 +18,12 @@
  ****************************************************************************/
 #ifndef _ASM_ARM_MODULE_H
 #define _ASM_ARM_MODULE_H
-struct mod_arch_specific
-{
+#include <asm-generic/module.h>
+struct unwind_table;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int foo;
-};
-#define Elf_Shdr Elf32_Shdr
-#define Elf_Sym Elf32_Sym
+#define MODULE_ARCH_VERMAGIC_ARMVSN "ARMv" __stringify(__LINUX_ARM_ARCH__) " "
+#define MODULE_ARCH_VERMAGIC_P2V ""
+#define MODULE_ARCH_VERMAGIC_ARMTHUMB ""
+#define MODULE_ARCH_VERMAGIC   MODULE_ARCH_VERMAGIC_ARMVSN   MODULE_ARCH_VERMAGIC_ARMTHUMB   MODULE_ARCH_VERMAGIC_P2V
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define Elf_Ehdr Elf32_Ehdr
-#define MODULE_ARCH_VERMAGIC "ARMv" __stringify(__LINUX_ARM_ARCH__) " "
 #endif

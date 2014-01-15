@@ -19,7 +19,7 @@
 #ifndef __LINUX_USB_H
 #define __LINUX_USB_H
 #include <linux/mod_devicetable.h>
-#include <linux/usb_ch9.h>
+#include <linux/usb/ch9.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define USB_MAJOR 180
 #define USB_DEVICE_MAJOR 189

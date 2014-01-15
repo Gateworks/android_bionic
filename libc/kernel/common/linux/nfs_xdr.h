@@ -18,631 +18,279 @@
  ****************************************************************************/
 #ifndef _LINUX_NFS_XDR_H
 #define _LINUX_NFS_XDR_H
-#include <linux/sunrpc/xprt.h>
 #include <linux/nfsacl.h>
+#include <linux/sunrpc/gss_api.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define NFS_MAX_FILE_IO_SIZE (1048576U)
 #define NFS_DEF_FILE_IO_SIZE (4096U)
 #define NFS_MIN_FILE_IO_SIZE (1024U)
+struct nfs4_string {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ unsigned int len;
+ char *data;
+};
 struct nfs_fsid {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  uint64_t major;
  uint64_t minor;
 };
+struct nfs4_threshold {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ __u32 bm;
+ __u32 l_type;
+ __u64 rd_sz;
+ __u64 wr_sz;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ __u64 rd_io_sz;
+ __u64 wr_io_sz;
+};
 struct nfs_fattr {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned short valid;
- __u64 pre_size;
- struct timespec pre_mtime;
- struct timespec pre_ctime;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- enum nfs_ftype type;
- __u32 mode;
+ unsigned int valid;
+ umode_t mode;
  __u32 nlink;
- __u32 uid;
+ kuid_t uid;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- __u32 gid;
+ kgid_t gid;
+ dev_t rdev;
  __u64 size;
  union {
- struct {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct {
  __u32 blocksize;
  __u32 blocks;
  } nfs2;
- struct {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct {
  __u64 used;
  } nfs3;
  } du;
- dev_t rdev;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  struct nfs_fsid fsid;
  __u64 fileid;
+ __u64 mounted_on_fileid;
  struct timespec atime;
- struct timespec mtime;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct timespec mtime;
  struct timespec ctime;
- __u32 bitmap[2];
  __u64 change_attr;
  __u64 pre_change_attr;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ __u64 pre_size;
+ struct timespec pre_mtime;
+ struct timespec pre_ctime;
  unsigned long time_start;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ unsigned long gencount;
+ struct nfs4_string *owner_name;
+ struct nfs4_string *group_name;
+ struct nfs4_threshold *mdsthreshold;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
-#define NFS_ATTR_WCC 0x0001
-#define NFS_ATTR_FATTR 0x0002
+#define NFS_ATTR_FATTR_TYPE (1U << 0)
+#define NFS_ATTR_FATTR_MODE (1U << 1)
+#define NFS_ATTR_FATTR_NLINK (1U << 2)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define NFS_ATTR_FATTR_V3 0x0004
-#define NFS_ATTR_FATTR_V4 0x0008
-#define NFS_ATTR_FATTR_V4_REFERRAL 0x0010
+#define NFS_ATTR_FATTR_OWNER (1U << 3)
+#define NFS_ATTR_FATTR_GROUP (1U << 4)
+#define NFS_ATTR_FATTR_RDEV (1U << 5)
+#define NFS_ATTR_FATTR_SIZE (1U << 6)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define NFS_ATTR_FATTR_PRESIZE (1U << 7)
+#define NFS_ATTR_FATTR_BLOCKS_USED (1U << 8)
+#define NFS_ATTR_FATTR_SPACE_USED (1U << 9)
+#define NFS_ATTR_FATTR_FSID (1U << 10)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define NFS_ATTR_FATTR_FILEID (1U << 11)
+#define NFS_ATTR_FATTR_ATIME (1U << 12)
+#define NFS_ATTR_FATTR_MTIME (1U << 13)
+#define NFS_ATTR_FATTR_CTIME (1U << 14)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define NFS_ATTR_FATTR_PREMTIME (1U << 15)
+#define NFS_ATTR_FATTR_PRECTIME (1U << 16)
+#define NFS_ATTR_FATTR_CHANGE (1U << 17)
+#define NFS_ATTR_FATTR_PRECHANGE (1U << 18)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define NFS_ATTR_FATTR_V4_LOCATIONS (1U << 19)
+#define NFS_ATTR_FATTR_V4_REFERRAL (1U << 20)
+#define NFS_ATTR_FATTR_MOUNTPOINT (1U << 21)
+#define NFS_ATTR_FATTR_MOUNTED_ON_FILEID (1U << 22)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define NFS_ATTR_FATTR_OWNER_NAME (1U << 23)
+#define NFS_ATTR_FATTR_GROUP_NAME (1U << 24)
+#define NFS_ATTR_FATTR (NFS_ATTR_FATTR_TYPE   | NFS_ATTR_FATTR_MODE   | NFS_ATTR_FATTR_NLINK   | NFS_ATTR_FATTR_OWNER   | NFS_ATTR_FATTR_GROUP   | NFS_ATTR_FATTR_RDEV   | NFS_ATTR_FATTR_SIZE   | NFS_ATTR_FATTR_FSID   | NFS_ATTR_FATTR_FILEID   | NFS_ATTR_FATTR_ATIME   | NFS_ATTR_FATTR_MTIME   | NFS_ATTR_FATTR_CTIME   | NFS_ATTR_FATTR_CHANGE)
+#define NFS_ATTR_FATTR_V2 (NFS_ATTR_FATTR   | NFS_ATTR_FATTR_BLOCKS_USED)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define NFS_ATTR_FATTR_V3 (NFS_ATTR_FATTR   | NFS_ATTR_FATTR_SPACE_USED)
+#define NFS_ATTR_FATTR_V4 (NFS_ATTR_FATTR   | NFS_ATTR_FATTR_SPACE_USED)
 struct nfs_fsinfo {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  struct nfs_fattr *fattr;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  __u32 rtmax;
  __u32 rtpref;
  __u32 rtmult;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  __u32 wtmax;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  __u32 wtpref;
  __u32 wtmult;
  __u32 dtpref;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  __u64 maxfilesize;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct timespec time_delta;
  __u32 lease_time;
+ __u32 layouttype;
+ __u32 blksize;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 struct nfs_fsstat {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  struct nfs_fattr *fattr;
  __u64 tbytes;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  __u64 fbytes;
  __u64 abytes;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  __u64 tfiles;
  __u64 ffiles;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  __u64 afiles;
 };
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct nfs2_fsstat {
  __u32 tsize;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  __u32 bsize;
  __u32 blocks;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  __u32 bfree;
  __u32 bavail;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 struct nfs_pathconf {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  struct nfs_fattr *fattr;
  __u32 max_link;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  __u32 max_namelen;
 };
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct nfs4_change_info {
  u32 atomic;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  u64 before;
  u64 after;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 struct nfs_seqid;
-struct nfs_openargs {
- const struct nfs_fh * fh;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_seqid * seqid;
- int open_flags;
- __u64 clientid;
- __u32 id;
+struct nfs4_channel_attrs {
+ u32 max_rqst_sz;
+ u32 max_resp_sz;
+ u32 max_resp_sz_cached;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- union {
- struct iattr * attrs;
- nfs4_verifier verifier;
- nfs4_stateid delegation;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int delegation_type;
- } u;
- const struct qstr * name;
- const struct nfs_server *server;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- const u32 * bitmask;
- __u32 claim;
+ u32 max_ops;
+ u32 max_reqs;
 };
-struct nfs_openres {
+struct nfs4_slot;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- nfs4_stateid stateid;
- struct nfs_fh fh;
- struct nfs4_change_info cinfo;
- __u32 rflags;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fattr * f_attr;
- struct nfs_fattr * dir_attr;
- const struct nfs_server *server;
- int delegation_type;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- nfs4_stateid delegation;
- __u32 do_recall;
- __u64 maxsize;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs_open_confirmargs {
- const struct nfs_fh * fh;
- nfs4_stateid * stateid;
- struct nfs_seqid * seqid;
+struct nfs4_sequence_args {
+ struct nfs4_slot *sa_slot;
+ u8 sa_cache_this : 1,
+ sa_privileged : 1;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
-struct nfs_open_confirmres {
- nfs4_stateid stateid;
-};
+struct nfs4_sequence_res {
+ struct nfs4_slot *sr_slot;
+ unsigned long sr_timestamp;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs_closeargs {
- struct nfs_fh * fh;
- nfs4_stateid * stateid;
- struct nfs_seqid * seqid;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int open_flags;
- const u32 * bitmask;
-};
-struct nfs_closeres {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- nfs4_stateid stateid;
- struct nfs_fattr * fattr;
- const struct nfs_server *server;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs_lowner {
- __u64 clientid;
- u32 id;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs_lock_args {
- struct nfs_fh * fh;
- struct file_lock * fl;
- struct nfs_seqid * lock_seqid;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- nfs4_stateid * lock_stateid;
- struct nfs_seqid * open_seqid;
- nfs4_stateid * open_stateid;
- struct nfs_lowner lock_owner;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned char block : 1;
- unsigned char reclaim : 1;
- unsigned char new_lock_owner : 1;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs_lock_res {
- nfs4_stateid stateid;
-};
-struct nfs_locku_args {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fh * fh;
- struct file_lock * fl;
- struct nfs_seqid * seqid;
- nfs4_stateid * stateid;
+ int sr_status;
+ u32 sr_status_flags;
+ u32 sr_highest_slotid;
+ u32 sr_target_highest_slotid;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
-struct nfs_locku_res {
- nfs4_stateid stateid;
+struct nfs4_get_lease_time_args {
+ struct nfs4_sequence_args la_seq_args;
 };
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs_lockt_args {
- struct nfs_fh * fh;
- struct file_lock * fl;
- struct nfs_lowner lock_owner;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-};
-struct nfs_lockt_res {
- struct file_lock * denied;
+struct nfs4_get_lease_time_res {
+ struct nfs4_sequence_res lr_seq_res;
+ struct nfs_fsinfo *lr_fsinfo;
 };
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs4_delegreturnargs {
- const struct nfs_fh *fhandle;
- const nfs4_stateid *stateid;
- const u32 * bitmask;
+#define PNFS_LAYOUT_MAXSIZE 4096
+struct nfs4_layoutdriver_data {
+ struct page **pages;
+ __u32 pglen;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ __u32 len;
 };
-struct nfs4_delegreturnres {
- struct nfs_fattr * fattr;
- const struct nfs_server *server;
+struct pnfs_layout_range {
+ u32 iomode;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ u64 offset;
+ u64 length;
 };
-struct nfs_readargs {
- struct nfs_fh * fh;
- struct nfs_open_context *context;
+struct nfs4_layoutget_args {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- __u64 offset;
- __u32 count;
- unsigned int pgbase;
- struct page ** pages;
+ struct nfs4_sequence_args seq_args;
+ __u32 type;
+ struct pnfs_layout_range range;
+ __u64 minlength;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-};
-struct nfs_readres {
- struct nfs_fattr * fattr;
- __u32 count;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int eof;
-};
-struct nfs_writeargs {
- struct nfs_fh * fh;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_open_context *context;
- __u64 offset;
- __u32 count;
- enum nfs3_stable_how stable;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned int pgbase;
- struct page ** pages;
- const u32 * bitmask;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs_writeverf {
- enum nfs3_stable_how committed;
- __u32 verifier[2];
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs_writeres {
- struct nfs_fattr * fattr;
- struct nfs_writeverf * verf;
- __u32 count;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- const struct nfs_server *server;
-};
-struct nfs_entry {
- __u64 ino;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- __u64 cookie,
- prev_cookie;
- const char * name;
- unsigned int len;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int eof;
- struct nfs_fh * fh;
- struct nfs_fattr * fattr;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs_sattrargs {
- struct nfs_fh * fh;
- struct iattr * sattr;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs_diropargs {
- struct nfs_fh * fh;
- const char * name;
- unsigned int len;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-};
-struct nfs_createargs {
- struct nfs_fh * fh;
- const char * name;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned int len;
- struct iattr * sattr;
-};
-struct nfs_renameargs {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fh * fromfh;
- const char * fromname;
- unsigned int fromlen;
- struct nfs_fh * tofh;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- const char * toname;
- unsigned int tolen;
-};
-struct nfs_setattrargs {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fh * fh;
- nfs4_stateid stateid;
- struct iattr * iap;
- const struct nfs_server * server;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- const u32 * bitmask;
-};
-struct nfs_setaclargs {
- struct nfs_fh * fh;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- size_t acl_len;
- unsigned int acl_pgbase;
- struct page ** acl_pages;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs_getaclargs {
- struct nfs_fh * fh;
- size_t acl_len;
- unsigned int acl_pgbase;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct page ** acl_pages;
-};
-struct nfs_setattrres {
- struct nfs_fattr * fattr;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- const struct nfs_server * server;
-};
-struct nfs_linkargs {
- struct nfs_fh * fromfh;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fh * tofh;
- const char * toname;
- unsigned int tolen;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs_symlinkargs {
- struct nfs_fh * fromfh;
- const char * fromname;
- unsigned int fromlen;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- const char * topath;
- unsigned int tolen;
- struct iattr * sattr;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs_readdirargs {
- struct nfs_fh * fh;
- __u32 cookie;
- unsigned int count;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct page ** pages;
-};
-struct nfs3_getaclargs {
- struct nfs_fh * fh;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int mask;
- struct page ** pages;
-};
-struct nfs3_setaclargs {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct inode * inode;
- int mask;
- struct posix_acl * acl_access;
- struct posix_acl * acl_default;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct page ** pages;
-};
-struct nfs_diropok {
- struct nfs_fh * fh;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fattr * fattr;
-};
-struct nfs_readlinkargs {
- struct nfs_fh * fh;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned int pgbase;
- unsigned int pglen;
- struct page ** pages;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs3_sattrargs {
- struct nfs_fh * fh;
- struct iattr * sattr;
- unsigned int guard;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct timespec guardtime;
-};
-struct nfs3_diropargs {
- struct nfs_fh * fh;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- const char * name;
- unsigned int len;
-};
-struct nfs3_accessargs {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fh * fh;
- __u32 access;
-};
-struct nfs3_createargs {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fh * fh;
- const char * name;
- unsigned int len;
- struct iattr * sattr;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- enum nfs3_createmode createmode;
- __u32 verifier[2];
-};
-struct nfs3_mkdirargs {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fh * fh;
- const char * name;
- unsigned int len;
- struct iattr * sattr;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-};
-struct nfs3_symlinkargs {
- struct nfs_fh * fromfh;
- const char * fromname;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned int fromlen;
- const char * topath;
- unsigned int tolen;
- struct iattr * sattr;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-};
-struct nfs3_mknodargs {
- struct nfs_fh * fh;
- const char * name;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned int len;
- enum nfs3_ftype type;
- struct iattr * sattr;
- dev_t rdev;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-};
-struct nfs3_renameargs {
- struct nfs_fh * fromfh;
- const char * fromname;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned int fromlen;
- struct nfs_fh * tofh;
- const char * toname;
- unsigned int tolen;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-};
-struct nfs3_linkargs {
- struct nfs_fh * fromfh;
- struct nfs_fh * tofh;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- const char * toname;
- unsigned int tolen;
-};
-struct nfs3_readdirargs {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fh * fh;
- __u64 cookie;
- __u32 verf[2];
- int plus;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned int count;
- struct page ** pages;
-};
-struct nfs3_diropres {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fattr * dir_attr;
- struct nfs_fh * fh;
- struct nfs_fattr * fattr;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs3_accessres {
- struct nfs_fattr * fattr;
- __u32 access;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct nfs3_readlinkargs {
- struct nfs_fh * fh;
- unsigned int pgbase;
- unsigned int pglen;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct page ** pages;
-};
-struct nfs3_renameres {
- struct nfs_fattr * fromattr;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fattr * toattr;
-};
-struct nfs3_linkres {
- struct nfs_fattr * dir_attr;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fattr * fattr;
-};
-struct nfs3_readdirres {
- struct nfs_fattr * dir_attr;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- __u32 * verf;
- int plus;
-};
-struct nfs3_getaclres {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fattr * fattr;
- int mask;
- unsigned int acl_access_count;
- unsigned int acl_default_count;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct posix_acl * acl_access;
- struct posix_acl * acl_default;
-};
-struct nfs_page;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define NFS_PAGEVEC_SIZE (8U)
-struct nfs_read_data {
- int flags;
- struct rpc_task task;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ __u32 maxcount;
  struct inode *inode;
- struct rpc_cred *cred;
- struct nfs_fattr fattr;
- struct list_head pages;
+ struct nfs_open_context *ctx;
+ nfs4_stateid stateid;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_page *req;
- struct page **pagevec;
- unsigned int npages;
- struct nfs_readargs args;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_readres res;
- struct page *page_array[NFS_PAGEVEC_SIZE];
+ unsigned long timestamp;
+ struct nfs4_layoutdriver_data layout;
 };
-struct nfs_write_data {
+struct nfs4_layoutget_res {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int flags;
- struct rpc_task task;
+ struct nfs4_sequence_res seq_res;
+ __u32 return_on_close;
+ struct pnfs_layout_range range;
+ __u32 type;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ nfs4_stateid stateid;
+ struct nfs4_layoutdriver_data *layoutp;
+};
+struct nfs4_layoutget {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct nfs4_layoutget_args args;
+ struct nfs4_layoutget_res res;
+ gfp_t gfp_flags;
+};
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct nfs4_getdevicelist_args {
+ struct nfs4_sequence_args seq_args;
+ const struct nfs_fh *fh;
+ u32 layoutclass;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+};
+struct nfs4_getdevicelist_res {
+ struct nfs4_sequence_res seq_res;
+ struct pnfs_devicelist *devlist;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+};
+struct nfs4_getdeviceinfo_args {
+ struct nfs4_sequence_args seq_args;
+ struct pnfs_device *pdev;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+};
+struct nfs4_getdeviceinfo_res {
+ struct nfs4_sequence_res seq_res;
+ struct pnfs_device *pdev;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+};
+struct nfs4_layoutcommit_args {
+ struct nfs4_sequence_args seq_args;
+ nfs4_stateid stateid;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ __u64 lastbytewritten;
  struct inode *inode;
- struct rpc_cred *cred;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct nfs_fattr fattr;
- struct nfs_writeverf verf;
- struct list_head pages;
- struct nfs_page *req;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct page **pagevec;
- unsigned int npages;
- struct nfs_writeargs args;
- struct nfs_writeres res;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct page *page_array[NFS_PAGEVEC_SIZE];
+ const u32 *bitmask;
 };
-struct nfs_access_entry;
-struct nfs_rpc_ops {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int version;
- struct dentry_operations *dentry_ops;
- struct inode_operations *dir_inode_ops;
- struct inode_operations *file_inode_ops;
+struct nfs4_layoutcommit_res {
+ struct nfs4_sequence_res seq_res;
+ struct nfs_fattr *fattr;
+ const struct nfs_server *server;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*getroot) (struct nfs_server *, struct nfs_fh *,
- struct nfs_fsinfo *);
- int (*getattr) (struct nfs_server *, struct nfs_fh *,
- struct nfs_fattr *);
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*setattr) (struct dentry *, struct nfs_fattr *,
- struct iattr *);
- int (*lookup) (struct inode *, struct qstr *,
- struct nfs_fh *, struct nfs_fattr *);
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*access) (struct inode *, struct nfs_access_entry *);
- int (*readlink)(struct inode *, struct page *, unsigned int,
- unsigned int);
- int (*read) (struct nfs_read_data *);
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*write) (struct nfs_write_data *);
- int (*commit) (struct nfs_write_data *);
- int (*create) (struct inode *, struct dentry *,
- struct iattr *, int, struct nameidata *);
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*remove) (struct inode *, struct qstr *);
- int (*unlink_setup) (struct rpc_message *,
- struct dentry *, struct qstr *);
- int (*unlink_done) (struct dentry *, struct rpc_task *);
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*rename) (struct inode *, struct qstr *,
- struct inode *, struct qstr *);
- int (*link) (struct inode *, struct inode *, struct qstr *);
- int (*symlink) (struct inode *, struct qstr *, struct qstr *,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct iattr *, struct nfs_fh *,
- struct nfs_fattr *);
- int (*mkdir) (struct inode *, struct dentry *, struct iattr *);
- int (*rmdir) (struct inode *, struct qstr *);
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*readdir) (struct dentry *, struct rpc_cred *,
- u64, struct page *, unsigned int, int);
- int (*mknod) (struct inode *, struct dentry *, struct iattr *,
- dev_t);
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*statfs) (struct nfs_server *, struct nfs_fh *,
- struct nfs_fsstat *);
- int (*fsinfo) (struct nfs_server *, struct nfs_fh *,
- struct nfs_fsinfo *);
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*pathconf) (struct nfs_server *, struct nfs_fh *,
- struct nfs_pathconf *);
- u32 * (*decode_dirent)(u32 *, struct nfs_entry *, int plus);
- void (*read_setup) (struct nfs_read_data *);
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*read_done) (struct rpc_task *, struct nfs_read_data *);
- void (*write_setup) (struct nfs_write_data *, int how);
- int (*write_done) (struct rpc_task *, struct nfs_write_data *);
- void (*commit_setup) (struct nfs_write_data *, int how);
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*commit_done) (struct rpc_task *, struct nfs_write_data *);
- int (*file_open) (struct inode *, struct file *);
- int (*file_release) (struct inode *, struct file *);
- int (*lock)(struct file *, int, struct file_lock *);
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- void (*clear_acl_cache)(struct inode *);
+ int status;
 };
-#define NFS_CALL(op, inode, args) NFS_PROTO(inode)->op args
 #endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

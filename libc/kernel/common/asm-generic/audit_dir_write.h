@@ -16,3 +16,25 @@
  ***
  ****************************************************************************
  ****************************************************************************/
+#ifdef __NR_rename
+#endif
+#ifdef __NR_mkdir
+#endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#ifdef __NR_rmdir
+#endif
+#ifdef __NR_creat
+#endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#ifdef __NR_link
+#endif
+#ifdef __NR_unlink
+#endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#ifdef __NR_symlink
+#endif
+#ifdef __NR_mknod
+#endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#ifdef __NR_mkdirat
+#endif

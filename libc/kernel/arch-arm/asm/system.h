@@ -16,6 +16,10 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef __ASM_ARM_SYSTEM_H
-#define __ASM_ARM_SYSTEM_H
-#endif
+#include <asm/barrier.h>
+#include <asm/compiler.h>
+#include <asm/cmpxchg.h>
+#include <asm/switch_to.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <asm/system_info.h>
+#include <asm/system_misc.h>

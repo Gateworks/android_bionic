@@ -18,4 +18,8 @@
  ****************************************************************************/
 #ifndef _ASM_GENERIC_FUTEX_H
 #define _ASM_GENERIC_FUTEX_H
+#include <linux/futex.h>
+#include <linux/uaccess.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <asm/errno.h>
 #endif

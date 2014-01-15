@@ -22,4 +22,5 @@
 #include <linux/netdevice.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #include <linux/random.h>
+#include <asm/unaligned.h>
 #endif

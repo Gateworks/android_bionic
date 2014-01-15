@@ -18,8 +18,11 @@
  ****************************************************************************/
 #ifndef _LINUX_KDEV_T_H
 #define _LINUX_KDEV_T_H
-#define MAJOR(dev) ((dev)>>8)
-#define MINOR(dev) ((dev) & 0xff)
+#include <uapi/linux/kdev_t.h>
+#define MINORBITS 20
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define MKDEV(ma,mi) ((ma)<<8 | (mi))
+#define MINORMASK ((1U << MINORBITS) - 1)
+#define print_dev_t(buffer, dev)   sprintf((buffer), "%u:%u\n", MAJOR(dev), MINOR(dev))
+#define format_dev_t(buffer, dev)   ({   sprintf(buffer, "%u:%u", MAJOR(dev), MINOR(dev));   buffer;   })
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

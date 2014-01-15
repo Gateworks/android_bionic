@@ -1,0 +1,110 @@
+/****************************************************************************
+ ****************************************************************************
+ ***
+ ***   This header was automatically generated from a Linux kernel header
+ ***   of the same name, to make information necessary for userspace to
+ ***   call into the kernel available to libc.  It contains only constants,
+ ***   structures, and macros generated from the original header, and thus,
+ ***   contains no copyrightable information.
+ ***
+ ***   To edit the content of this header, modify the corresponding
+ ***   source file (e.g. under external/kernel-headers/original/) then
+ ***   run bionic/libc/kernel/tools/update_all.py
+ ***
+ ***   Any manual change here will be lost the next time this script will
+ ***   be run. You've been warned!
+ ***
+ ****************************************************************************
+ ****************************************************************************/
+#ifndef LLC_C_AC_H
+#define LLC_C_AC_H
+#define LLC_CONN_AC_CLR_REMOTE_BUSY 1
+#define LLC_CONN_AC_CONN_IND 2
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_CONN_CONFIRM 3
+#define LLC_CONN_AC_DATA_IND 4
+#define LLC_CONN_AC_DISC_IND 5
+#define LLC_CONN_AC_RESET_IND 6
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_RESET_CONFIRM 7
+#define LLC_CONN_AC_REPORT_STATUS 8
+#define LLC_CONN_AC_CLR_REMOTE_BUSY_IF_Fb_EQ_1 9
+#define LLC_CONN_AC_STOP_REJ_TMR_IF_DATA_FLAG_EQ_2 10
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_SEND_DISC_CMD_Pb_SET_X 11
+#define LLC_CONN_AC_SEND_DM_RSP_Fb_SET_Pb 12
+#define LLC_CONN_AC_SEND_DM_RSP_Fb_SET_1 13
+#define LLC_CONN_AC_SEND_DM_RSP_Fb_SET_F_FLAG 14
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_SEND_FRMR_RSP_Fb_SET_X 15
+#define LLC_CONN_AC_RESEND_FRMR_RSP_Fb_SET_0 16
+#define LLC_CONN_AC_RESEND_FRMR_RSP_Fb_SET_Pb 17
+#define LLC_CONN_AC_SEND_I_CMD_Pb_SET_1 18
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_RESEND_I_CMD_Pb_SET_1 19
+#define LLC_CONN_AC_RESEND_I_CMD_Pb_SET_1_OR_SEND_RR 20
+#define LLC_CONN_AC_SEND_I_XXX_Xb_SET_0 21
+#define LLC_CONN_AC_RESEND_I_XXX_Xb_SET_0 22
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_RESEND_I_XXX_Xb_SET_0_OR_SEND_RR 23
+#define LLC_CONN_AC_RESEND_I_RSP_Fb_SET_1 24
+#define LLC_CONN_AC_SEND_REJ_CMD_Pb_SET_1 25
+#define LLC_CONN_AC_SEND_REJ_RSP_Fb_SET_1 26
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_SEND_REJ_XXX_Xb_SET_0 27
+#define LLC_CONN_AC_SEND_RNR_CMD_Pb_SET_1 28
+#define LLC_CONN_AC_SEND_RNR_RSP_Fb_SET_1 29
+#define LLC_CONN_AC_SEND_RNR_XXX_Xb_SET_0 30
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_SET_REMOTE_BUSY 31
+#define LLC_CONN_AC_OPTIONAL_SEND_RNR_XXX_Xb_SET_0 32
+#define LLC_CONN_AC_SEND_RR_CMD_Pb_SET_1 33
+#define LLC_CONN_AC_SEND_ACK_CMD_Pb_SET_1 34
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_SEND_RR_RSP_Fb_SET_1 35
+#define LLC_CONN_AC_SEND_ACK_RSP_Fb_SET_1 36
+#define LLC_CONN_AC_SEND_RR_XXX_Xb_SET_0 37
+#define LLC_CONN_AC_SEND_ACK_XXX_Xb_SET_0 38
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_SEND_SABME_CMD_Pb_SET_X 39
+#define LLC_CONN_AC_SEND_UA_RSP_Fb_SET_Pb 40
+#define LLC_CONN_AC_SEND_UA_RSP_Fb_SET_F_FLAG 41
+#define LLC_CONN_AC_S_FLAG_SET_0 42
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_S_FLAG_SET_1 43
+#define LLC_CONN_AC_START_P_TMR 44
+#define LLC_CONN_AC_START_ACK_TMR 45
+#define LLC_CONN_AC_START_REJ_TMR 46
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_START_ACK_TMR_IF_NOT_RUNNING 47
+#define LLC_CONN_AC_STOP_ACK_TMR 48
+#define LLC_CONN_AC_STOP_P_TMR 49
+#define LLC_CONN_AC_STOP_REJ_TMR 50
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_STOP_ALL_TMRS 51
+#define LLC_CONN_AC_STOP_OTHER_TMRS 52
+#define LLC_CONN_AC_UPDATE_Nr_RECEIVED 53
+#define LLC_CONN_AC_UPDATE_P_FLAG 54
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_DATA_FLAG_SET_2 55
+#define LLC_CONN_AC_DATA_FLAG_SET_0 56
+#define LLC_CONN_AC_DATA_FLAG_SET_1 57
+#define LLC_CONN_AC_DATA_FLAG_SET_1_IF_DATA_FLAG_EQ_0 58
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_P_FLAG_SET_0 59
+#define LLC_CONN_AC_P_FLAG_SET_P 60
+#define LLC_CONN_AC_REMOTE_BUSY_SET_0 61
+#define LLC_CONN_AC_RETRY_CNT_SET_0 62
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_RETRY_CNT_INC_BY_1 63
+#define LLC_CONN_AC_Vr_SET_0 64
+#define LLC_CONN_AC_Vr_INC_BY_1 65
+#define LLC_CONN_AC_Vs_SET_0 66
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define LLC_CONN_AC_Vs_SET_Nr 67
+#define LLC_CONN_AC_F_FLAG_SET_P 68
+#define LLC_CONN_AC_STOP_SENDACK_TMR 70
+#define LLC_CONN_AC_START_SENDACK_TMR_IF_NOT_RUNNING 71
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+typedef int (*llc_conn_action_t)(struct sock *sk, struct sk_buff *skb);
+#endif

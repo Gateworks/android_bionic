@@ -51,7 +51,7 @@ typedef struct { DECLARE_BITMAP(bits, MAX_NUMNODES); } nodemask_t;
 #define first_node(src) __first_node(&(src))
 #define next_node(n, src) __next_node((n), &(src))
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define nodemask_of_node(node)  ({   typeof(_unused_nodemask_arg_) m;   if (sizeof(m) == sizeof(unsigned long)) {   m.bits[0] = 1UL<<(node);   } else {   nodes_clear(m);   node_set((node), m);   }   m;  })
+#define nodemask_of_node(node)  ({   typeof(_unused_nodemask_arg_) m;   if (sizeof(m) == sizeof(unsigned long)) {   m.bits[0] = 1UL << (node);   } else {   init_nodemask_of_node(&m, (node));   }   m;  })
 #define first_unset_node(mask) __first_unset_node(&(mask))
 #define NODE_MASK_LAST_WORD BITMAP_LAST_WORD_MASK(MAX_NUMNODES)
 #if MAX_NUMNODES <= BITS_PER_LONG
@@ -64,42 +64,73 @@ typedef struct { DECLARE_BITMAP(bits, MAX_NUMNODES); } nodemask_t;
 #define NODE_MASK_NONE  ((nodemask_t) { {   [0 ... BITS_TO_LONGS(MAX_NUMNODES)-1] = 0UL  } })
 #define nodes_addr(src) ((src).bits)
 #define nodemask_scnprintf(buf, len, src)   __nodemask_scnprintf((buf), (len), &(src), MAX_NUMNODES)
-#define nodemask_parse(ubuf, ulen, dst)   __nodemask_parse((ubuf), (ulen), &(dst), MAX_NUMNODES)
+#define nodemask_parse_user(ubuf, ulen, dst)   __nodemask_parse_user((ubuf), (ulen), &(dst), MAX_NUMNODES)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define nodelist_scnprintf(buf, len, src)   __nodelist_scnprintf((buf), (len), &(src), MAX_NUMNODES)
 #define nodelist_parse(buf, dst) __nodelist_parse((buf), &(dst), MAX_NUMNODES)
 #define node_remap(oldbit, old, new)   __node_remap((oldbit), &(old), &(new), MAX_NUMNODES)
 #define nodes_remap(dst, src, old, new)   __nodes_remap(&(dst), &(src), &(old), &(new), MAX_NUMNODES)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define nodes_onto(dst, orig, relmap)   __nodes_onto(&(dst), &(orig), &(relmap), MAX_NUMNODES)
+#define nodes_fold(dst, orig, sz)   __nodes_fold(&(dst), &(orig), sz, MAX_NUMNODES)
 #if MAX_NUMNODES > 1
 #define for_each_node_mask(node, mask)   for ((node) = first_node(mask);   (node) < MAX_NUMNODES;   (node) = next_node((node), (mask)))
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #else
 #define for_each_node_mask(node, mask)   if (!nodes_empty(mask))   for ((node) = 0; (node) < 1; (node)++)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
-#if MAX_NUMNODES > 1
-#define num_online_nodes() nodes_weight(node_online_map)
-#define num_possible_nodes() nodes_weight(node_possible_map)
+enum node_states {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define node_online(node) node_isset((node), node_online_map)
-#define node_possible(node) node_isset((node), node_possible_map)
-#define first_online_node first_node(node_online_map)
-#define next_online_node(nid) next_node((nid), node_online_map)
+ N_POSSIBLE,
+ N_ONLINE,
+ N_NORMAL_MEMORY,
+ N_HIGH_MEMORY = N_NORMAL_MEMORY,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ N_MEMORY = N_HIGH_MEMORY,
+ N_CPU,
+ NR_NODE_STATES
+};
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#if MAX_NUMNODES > 1
+#define for_each_node_state(__node, __state)   for_each_node_mask((__node), node_states[__state])
+#define first_online_node first_node(node_states[N_ONLINE])
+#define next_online_node(nid) next_node((nid), node_states[N_ONLINE])
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #else
-#define num_online_nodes() 1
-#define num_possible_nodes() 1
-#define node_online(node) ((node) == 0)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define node_possible(node) ((node) == 0)
+#define for_each_node_state(node, __state)   for ( (node) = 0; (node) == 0; (node) = 1)
 #define first_online_node 0
 #define next_online_node(nid) (MAX_NUMNODES)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define nr_node_ids 1
+#define nr_online_nodes 1
+#define node_set_online(node) node_set_state((node), N_ONLINE)
+#define node_set_offline(node) node_clear_state((node), N_ONLINE)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#endif
+#define node_online_map node_states[N_ONLINE]
+#define node_possible_map node_states[N_POSSIBLE]
+#define num_online_nodes() num_node_state(N_ONLINE)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define num_possible_nodes() num_node_state(N_POSSIBLE)
+#define node_online(node) node_state((node), N_ONLINE)
+#define node_possible(node) node_state((node), N_POSSIBLE)
+#define for_each_node(node) for_each_node_state(node, N_POSSIBLE)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define for_each_online_node(node) for_each_node_state(node, N_ONLINE)
+#if NODES_SHIFT > 8
+#define NODEMASK_ALLOC(type, name, gfp_flags)   type *name = kmalloc(sizeof(*name), gfp_flags)
+#define NODEMASK_FREE(m) kfree(m)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#else
+#define NODEMASK_ALLOC(type, name, gfp_flags) type _##name, *name = &_##name
+#define NODEMASK_FREE(m) do {} while (0)
 #endif
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define any_online_node(mask)  ({   int node;   for_each_node_mask(node, (mask))   if (node_online(node))   break;   node;  })
-#define node_set_online(node) set_bit((node), node_online_map.bits)
-#define node_set_offline(node) clear_bit((node), node_online_map.bits)
-#define for_each_node(node) for_each_node_mask((node), node_possible_map)
+struct nodemask_scratch {
+ nodemask_t mask1;
+ nodemask_t mask2;
+};
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define for_each_online_node(node) for_each_node_mask((node), node_online_map)
+#define NODEMASK_SCRATCH(x)   NODEMASK_ALLOC(struct nodemask_scratch, x,   GFP_KERNEL | __GFP_NORETRY)
+#define NODEMASK_SCRATCH_FREE(x) NODEMASK_FREE(x)
 #endif

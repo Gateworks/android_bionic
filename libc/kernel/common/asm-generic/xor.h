@@ -16,5 +16,5 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#include <asm/processor.h>
+#include <linux/prefetch.h>
 #define XOR_TRY_TEMPLATES   do {   xor_speed(&xor_block_8regs);   xor_speed(&xor_block_8regs_p);   xor_speed(&xor_block_32regs);   xor_speed(&xor_block_32regs_p);   } while (0)

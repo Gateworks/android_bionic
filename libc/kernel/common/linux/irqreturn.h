@@ -18,9 +18,13 @@
  ****************************************************************************/
 #ifndef _LINUX_IRQRETURN_H
 #define _LINUX_IRQRETURN_H
-typedef int irqreturn_t;
-#define IRQ_NONE (0)
+enum irqreturn {
+ IRQ_NONE = (0 << 0),
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define IRQ_HANDLED (1)
-#define IRQ_RETVAL(x) ((x) != 0)
+ IRQ_HANDLED = (1 << 0),
+ IRQ_WAKE_THREAD = (1 << 1),
+};
+typedef enum irqreturn irqreturn_t;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define IRQ_RETVAL(x) ((x) != IRQ_NONE)
 #endif

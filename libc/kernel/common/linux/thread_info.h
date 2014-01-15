@@ -18,12 +18,43 @@
  ****************************************************************************/
 #ifndef _LINUX_THREAD_INFO_H
 #define _LINUX_THREAD_INFO_H
+#include <linux/types.h>
+#include <linux/bug.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct timespec;
+struct compat_timespec;
 struct restart_block {
  long (*fn)(struct restart_block *);
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned long arg0, arg1, arg2, arg3;
+ union {
+ struct {
+ u32 __user *uaddr;
+ u32 val;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ u32 flags;
+ u32 bitset;
+ u64 time;
+ u32 __user *uaddr2;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ } futex;
+ struct {
+ clockid_t clockid;
+ struct timespec __user *rmtp;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ u64 expires;
+ } nanosleep;
+ struct {
+ struct pollfd __user *ufds;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ int nfds;
+ int has_timeout;
+ unsigned long tv_sec;
+ unsigned long tv_nsec;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ } poll;
+ };
 };
 #include <linux/bitops.h>
-#include <asm/thread_info.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <asm/thread_info.h>
 #endif

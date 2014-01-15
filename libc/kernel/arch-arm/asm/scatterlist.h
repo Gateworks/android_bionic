@@ -21,14 +21,5 @@
 #include <asm/memory.h>
 #include <asm/types.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct scatterlist {
- struct page *page;
- unsigned int offset;
- dma_addr_t dma_address;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned int length;
-};
-#define sg_dma_address(sg) ((sg)->dma_address)
-#define sg_dma_len(sg) ((sg)->length)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <asm-generic/scatterlist.h>
 #endif

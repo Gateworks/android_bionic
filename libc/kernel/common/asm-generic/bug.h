@@ -19,18 +19,26 @@
 #ifndef _ASM_GENERIC_BUG_H
 #define _ASM_GENERIC_BUG_H
 #include <linux/compiler.h>
-#ifndef HAVE_ARCH_BUG
+#ifndef __ASSEMBLY__
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define BUG()
+#include <linux/kernel.h>
+#ifndef HAVE_ARCH_BUG
+#define BUG() do {} while(0)
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #ifndef HAVE_ARCH_BUG_ON
 #define BUG_ON(condition) do { if (condition) ; } while(0)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
 #ifndef HAVE_ARCH_WARN_ON
-#define WARN_ON(condition) do { if (condition) ; } while(0)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define WARN_ON(condition) ({   int __ret_warn_on = !!(condition);   unlikely(__ret_warn_on);  })
+#endif
+#define WARN_TAINT(condition, taint, format...) WARN_ON(condition)
+#define WARN_ON_ONCE(condition) ({   static bool __section(.data.unlikely) __warned;   int __ret_warn_once = !!(condition);     if (unlikely(__ret_warn_once))   if (WARN_ON(!__warned))   __warned = true;   unlikely(__ret_warn_once);  })
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define WARN_ONCE(condition, format...) ({   static bool __section(.data.unlikely) __warned;   int __ret_warn_once = !!(condition);     if (unlikely(__ret_warn_once))   if (WARN(!__warned, format))   __warned = true;   unlikely(__ret_warn_once);  })
+#define WARN_TAINT_ONCE(condition, taint, format...) ({   static bool __section(.data.unlikely) __warned;   int __ret_warn_once = !!(condition);     if (unlikely(__ret_warn_once))   if (WARN_TAINT(!__warned, taint, format))   __warned = true;   unlikely(__ret_warn_once);  })
+#define WARN_ON_SMP(x) ({0;})
 #endif
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define WARN_ON_ONCE(condition)  ({   static int __warn_once = 1;   int __ret = 0;     if (unlikely((condition) && __warn_once)) {   __warn_once = 0;   WARN_ON(1);   __ret = 1;   }   __ret;  })
-#define WARN_ON_SMP(x) do { } while (0)
 #endif

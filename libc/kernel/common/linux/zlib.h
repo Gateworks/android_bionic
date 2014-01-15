@@ -22,7 +22,7 @@
 struct internal_state;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 typedef struct z_stream_s {
- Byte *next_in;
+ const Byte *next_in;
  uInt avail_in;
  uLong total_in;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

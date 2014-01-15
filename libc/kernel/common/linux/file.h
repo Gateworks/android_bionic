@@ -18,49 +18,21 @@
  ****************************************************************************/
 #ifndef __LINUX_FILE_H
 #define __LINUX_FILE_H
-#include <asm/atomic.h>
-#include <linux/posix_types.h>
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #include <linux/compiler.h>
-#include <linux/spinlock.h>
-#include <linux/rcupdate.h>
 #include <linux/types.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define NR_OPEN_DEFAULT BITS_PER_LONG
-struct embedded_fd_set {
- unsigned long fds_bits[1];
+#include <linux/posix_types.h>
+struct file;
+struct file_operations;
+struct vfsmount;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct dentry;
+struct path;
+struct fd {
+ struct file *file;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ int need_put;
 };
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define EMBEDDED_FD_SET_SIZE (BITS_PER_BYTE * sizeof(struct embedded_fd_set))
-struct fdtable {
- unsigned int max_fds;
- int max_fdset;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct file ** fd;
- fd_set *close_on_exec;
- fd_set *open_fds;
- struct rcu_head rcu;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct files_struct *free_files;
- struct fdtable *next;
-};
-struct files_struct {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- atomic_t count;
- struct fdtable *fdt;
- struct fdtable fdtab;
- spinlock_t file_lock ____cacheline_aligned_in_smp;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int next_fd;
- struct embedded_fd_set close_on_exec_init;
- struct embedded_fd_set open_fds_init;
- struct file * fd_array[NR_OPEN_DEFAULT];
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-};
-#define files_fdtable(files) (rcu_dereference((files)->fdt))
-struct kmem_cache;
-#define fcheck(fd) fcheck_files(current->files, fd)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct task_struct;
-struct files_struct *get_files_struct(struct task_struct *);
+#define get_unused_fd() get_unused_fd_flags(0)
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

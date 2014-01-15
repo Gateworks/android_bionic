@@ -21,30 +21,21 @@
 #include <linux/spinlock.h>
 #include <linux/preempt.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-typedef struct {
- unsigned sequence;
- spinlock_t lock;
-} seqlock_t;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define __SEQLOCK_UNLOCKED(lockname)   { 0, __SPIN_LOCK_UNLOCKED(lockname) }
-#define SEQLOCK_UNLOCKED   __SEQLOCK_UNLOCKED(old_style_seqlock_init)
-#define seqlock_init(x)   do { *(x) = (seqlock_t) __SEQLOCK_UNLOCKED(x); } while (0)
-#define DEFINE_SEQLOCK(x)   seqlock_t x = __SEQLOCK_UNLOCKED(x)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <asm/processor.h>
 typedef struct seqcount {
  unsigned sequence;
 } seqcount_t;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define SEQCNT_ZERO { 0 }
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define seqcount_init(x) do { *(x) = (seqcount_t) SEQCNT_ZERO; } while (0)
-#define write_seqlock_irqsave(lock, flags)   do { local_irq_save(flags); write_seqlock(lock); } while (0)
-#define write_seqlock_irq(lock)   do { local_irq_disable(); write_seqlock(lock); } while (0)
-#define write_seqlock_bh(lock)   do { local_bh_disable(); write_seqlock(lock); } while (0)
+typedef struct {
+ struct seqcount seqcount;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define write_sequnlock_irqrestore(lock, flags)   do { write_sequnlock(lock); local_irq_restore(flags); } while(0)
-#define write_sequnlock_irq(lock)   do { write_sequnlock(lock); local_irq_enable(); } while(0)
-#define write_sequnlock_bh(lock)   do { write_sequnlock(lock); local_bh_enable(); } while(0)
-#define read_seqbegin_irqsave(lock, flags)   ({ local_irq_save(flags); read_seqbegin(lock); })
+ spinlock_t lock;
+} seqlock_t;
+#define __SEQLOCK_UNLOCKED(lockname)   {   .seqcount = SEQCNT_ZERO,   .lock = __SPIN_LOCK_UNLOCKED(lockname)   }
+#define seqlock_init(x)   do {   seqcount_init(&(x)->seqcount);   spin_lock_init(&(x)->lock);   } while (0)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define read_seqretry_irqrestore(lock, iv, flags)   ({   int ret = read_seqretry(lock, iv);   local_irq_restore(flags);   ret;   })
+#define DEFINE_SEQLOCK(x)   seqlock_t x = __SEQLOCK_UNLOCKED(x)
+#define write_seqlock_irqsave(lock, flags)   do { flags = __write_seqlock_irqsave(lock); } while (0)
 #endif

@@ -21,7 +21,7 @@
 #include <linux/time.h>
 #include <linux/jiffies.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-typedef union {
+union ktime {
  s64 tv64;
 #if BITS_PER_LONG != (64 && !defined(CONFIG_KTIME_SCALAR))
  struct {
@@ -34,17 +34,17 @@ typedef union {
 #endif
  } tv;
 #endif
-} ktime_t;
+};
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define KTIME_MAX ((s64)~((u64)1 << 63))
-#define KTIME_SEC_MAX (KTIME_MAX / NSEC_PER_SEC)
+typedef union ktime ktime_t;
 #if BITS_PER_LONG == 64
 #if BITS_PER_LONG == 64
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define ktime_sub(lhs, rhs)   ({ (ktime_t){ .tv64 = (lhs).tv64 - (rhs).tv64 }; })
 #define ktime_add(lhs, rhs)   ({ (ktime_t){ .tv64 = (lhs).tv64 + (rhs).tv64 }; })
 #define ktime_add_ns(kt, nsval)   ({ (ktime_t){ .tv64 = (kt).tv64 + (nsval) }; })
+#define ktime_sub_ns(kt, nsval)   ({ (ktime_t){ .tv64 = (kt).tv64 - (nsval) }; })
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define ktime_to_timespec(kt) ns_to_timespec((kt).tv64)
 #define ktime_to_timeval(kt) ns_to_timeval((kt).tv64)
@@ -52,8 +52,8 @@ typedef union {
 #else
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
-#define KTIME_REALTIME_RES (ktime_t){ .tv64 = TICK_NSEC }
-#define KTIME_MONOTONIC_RES (ktime_t){ .tv64 = TICK_NSEC }
+#define LOW_RES_NSEC TICK_NSEC
+#define KTIME_LOW_RES (ktime_t){ .tv64 = LOW_RES_NSEC }
 #define ktime_get_real_ts(ts) getnstimeofday(ts)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif

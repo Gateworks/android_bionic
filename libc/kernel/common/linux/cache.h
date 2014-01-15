@@ -21,38 +21,4 @@
 #include <linux/kernel.h>
 #include <asm/cache.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#ifndef L1_CACHE_ALIGN
-#define L1_CACHE_ALIGN(x) ALIGN(x, L1_CACHE_BYTES)
 #endif
-#ifndef SMP_CACHE_BYTES
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define SMP_CACHE_BYTES L1_CACHE_BYTES
-#endif
-#ifndef __read_mostly
-#define __read_mostly
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#endif
-#ifndef ____cacheline_aligned
-#define ____cacheline_aligned __attribute__((__aligned__(SMP_CACHE_BYTES)))
-#endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#ifndef ____cacheline_aligned_in_smp
-#define ____cacheline_aligned_in_smp
-#endif
-#ifndef __cacheline_aligned
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define __cacheline_aligned   __attribute__((__aligned__(SMP_CACHE_BYTES),   __section__(".data.cacheline_aligned")))
-#endif
-#ifndef __cacheline_aligned_in_smp
-#define __cacheline_aligned_in_smp
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#endif
-#ifndef INTERNODE_CACHE_SHIFT
-#define INTERNODE_CACHE_SHIFT L1_CACHE_SHIFT
-#endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#ifndef ____cacheline_internodealigned_in_smp
-#define ____cacheline_internodealigned_in_smp
-#endif
-#endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

@@ -18,14 +18,6 @@
  ****************************************************************************/
 #ifndef __LINUX_KEYCHORD_H_
 #define __LINUX_KEYCHORD_H_
-#include <linux/input.h>
-#define KEYCHORD_VERSION 1
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct input_keychord {
- __u16 version;
- __u16 id;
- __u16 count;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- __u16 keycodes[];
-};
+#include <uapi/linux/keychord.h>
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

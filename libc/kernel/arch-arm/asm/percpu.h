@@ -16,8 +16,9 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef __ARM_PERCPU
-#define __ARM_PERCPU
+#ifndef _ASM_ARM_PERCPU_H_
+#define _ASM_ARM_PERCPU_H_
+#define set_my_cpu_offset(x) do {} while(0)
 #include <asm-generic/percpu.h>
-#endif
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#endif

@@ -18,4 +18,13 @@
  ****************************************************************************/
 #ifndef _ASM_GENERIC_SECTIONS_H_
 #define _ASM_GENERIC_SECTIONS_H_
+#ifndef dereference_function_descriptor
+#define dereference_function_descriptor(p) (p)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#endif
+#ifndef arch_is_kernel_text
+#endif
+#ifndef arch_is_kernel_data
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#endif
 #endif

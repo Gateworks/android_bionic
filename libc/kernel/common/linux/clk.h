@@ -18,9 +18,13 @@
  ****************************************************************************/
 #ifndef __LINUX_CLK_H
 #define __LINUX_CLK_H
+#include <linux/err.h>
+#include <linux/kernel.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/notifier.h>
 struct device;
 struct clk;
+struct device_node;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct clk *clk_get(struct device *dev, const char *id);
-struct clk *clk_get_parent(struct clk *clk);
+struct of_phandle_args;
 #endif

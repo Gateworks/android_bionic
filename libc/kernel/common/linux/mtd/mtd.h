@@ -18,134 +18,169 @@
  ****************************************************************************/
 #ifndef __MTD_MTD_H__
 #define __MTD_MTD_H__
-#error This is a kernel header. Perhaps include mtd-user.h instead?
 #include <linux/types.h>
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#include <linux/module.h>
 #include <linux/uio.h>
-#include <linux/notifier.h>
-#include <linux/mtd/compatmac.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/notifier.h>
+#include <linux/device.h>
 #include <mtd/mtd-abi.h>
+#include <asm/div64.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define MTD_CHAR_MAJOR 90
 #define MTD_BLOCK_MAJOR 31
-#define MAX_MTD_DEVICES 16
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define MTD_ERASE_PENDING 0x01
 #define MTD_ERASING 0x02
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define MTD_ERASE_SUSPEND 0x04
 #define MTD_ERASE_DONE 0x08
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define MTD_ERASE_FAILED 0x10
+#define MTD_FAIL_ADDR_UNKNOWN -1LL
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct erase_info {
  struct mtd_info *mtd;
- u_int32_t addr;
+ uint64_t addr;
+ uint64_t len;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- u_int32_t len;
- u_int32_t fail_addr;
+ uint64_t fail_addr;
  u_long time;
  u_long retries;
+ unsigned dev;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- u_int dev;
- u_int cell;
+ unsigned cell;
  void (*callback) (struct erase_info *self);
  u_long priv;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  u_char state;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  struct erase_info *next;
 };
 struct mtd_erase_region_info {
+ uint64_t offset;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- u_int32_t offset;
- u_int32_t erasesize;
- u_int32_t numblocks;
+ uint32_t erasesize;
+ uint32_t numblocks;
+ unsigned long *lockmap;
 };
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-typedef enum {
- MTD_OOB_PLACE,
- MTD_OOB_AUTO,
- MTD_OOB_RAW,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-} mtd_oob_mode_t;
 struct mtd_oob_ops {
- mtd_oob_mode_t mode;
+ unsigned int mode;
  size_t len;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  size_t retlen;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  size_t ooblen;
+ size_t oobretlen;
  uint32_t ooboffs;
  uint8_t *datbuf;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  uint8_t *oobbuf;
 };
+#define MTD_MAX_OOBFREE_ENTRIES_LARGE 32
+#define MTD_MAX_ECCPOS_ENTRIES_LARGE 640
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct nand_ecclayout {
+ __u32 eccbytes;
+ __u32 eccpos[MTD_MAX_ECCPOS_ENTRIES_LARGE];
+ __u32 oobavail;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct nand_oobfree oobfree[MTD_MAX_OOBFREE_ENTRIES_LARGE];
+};
+struct module;
 struct mtd_info {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  u_char type;
+ uint32_t flags;
+ uint64_t size;
+ uint32_t erasesize;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- u_int32_t flags;
- u_int32_t size;
- u_int32_t erasesize;
- u_int32_t writesize;
+ uint32_t writesize;
+ uint32_t writebufsize;
+ uint32_t oobsize;
+ uint32_t oobavail;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- u_int32_t oobsize;
- u_int32_t ecctype;
- u_int32_t eccsize;
-#define MTD_PROGREGION_CTRLMODE_VALID(mtd) (mtd)->oobsize
+ unsigned int erasesize_shift;
+ unsigned int writesize_shift;
+ unsigned int erasesize_mask;
+ unsigned int writesize_mask;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define MTD_PROGREGION_CTRLMODE_INVALID(mtd) (mtd)->ecctype
- char *name;
+ unsigned int bitflip_threshold;
+ const char *name;
  int index;
  struct nand_ecclayout *ecclayout;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ unsigned int ecc_step_size;
+ unsigned int ecc_strength;
  int numeraseregions;
  struct mtd_erase_region_info *eraseregions;
- u_int32_t bank_size;
- int (*erase) (struct mtd_info *mtd, struct erase_info *instr);
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*point) (struct mtd_info *mtd, loff_t from, size_t len, size_t *retlen, u_char **mtdbuf);
- void (*unpoint) (struct mtd_info *mtd, u_char * addr, loff_t from, size_t len);
- int (*read) (struct mtd_info *mtd, loff_t from, size_t len, size_t *retlen, u_char *buf);
- int (*write) (struct mtd_info *mtd, loff_t to, size_t len, size_t *retlen, const u_char *buf);
+ int (*_erase) (struct mtd_info *mtd, struct erase_info *instr);
+ int (*_point) (struct mtd_info *mtd, loff_t from, size_t len,
+ size_t *retlen, void **virt, resource_size_t *phys);
+ int (*_unpoint) (struct mtd_info *mtd, loff_t from, size_t len);
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*read_oob) (struct mtd_info *mtd, loff_t from,
+ unsigned long (*_get_unmapped_area) (struct mtd_info *mtd,
+ unsigned long len,
+ unsigned long offset,
+ unsigned long flags);
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ int (*_read) (struct mtd_info *mtd, loff_t from, size_t len,
+ size_t *retlen, u_char *buf);
+ int (*_write) (struct mtd_info *mtd, loff_t to, size_t len,
+ size_t *retlen, const u_char *buf);
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ int (*_panic_write) (struct mtd_info *mtd, loff_t to, size_t len,
+ size_t *retlen, const u_char *buf);
+ int (*_read_oob) (struct mtd_info *mtd, loff_t from,
  struct mtd_oob_ops *ops);
- int (*write_oob) (struct mtd_info *mtd, loff_t to,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ int (*_write_oob) (struct mtd_info *mtd, loff_t to,
  struct mtd_oob_ops *ops);
+ int (*_get_fact_prot_info) (struct mtd_info *mtd, struct otp_info *buf,
+ size_t len);
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*get_fact_prot_info) (struct mtd_info *mtd, struct otp_info *buf, size_t len);
- int (*read_fact_prot_reg) (struct mtd_info *mtd, loff_t from, size_t len, size_t *retlen, u_char *buf);
- int (*get_user_prot_info) (struct mtd_info *mtd, struct otp_info *buf, size_t len);
- int (*read_user_prot_reg) (struct mtd_info *mtd, loff_t from, size_t len, size_t *retlen, u_char *buf);
+ int (*_read_fact_prot_reg) (struct mtd_info *mtd, loff_t from,
+ size_t len, size_t *retlen, u_char *buf);
+ int (*_get_user_prot_info) (struct mtd_info *mtd, struct otp_info *buf,
+ size_t len);
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*write_user_prot_reg) (struct mtd_info *mtd, loff_t from, size_t len, size_t *retlen, u_char *buf);
- int (*lock_user_prot_reg) (struct mtd_info *mtd, loff_t from, size_t len);
- int (*writev) (struct mtd_info *mtd, const struct kvec *vecs, unsigned long count, loff_t to, size_t *retlen);
- void (*sync) (struct mtd_info *mtd);
+ int (*_read_user_prot_reg) (struct mtd_info *mtd, loff_t from,
+ size_t len, size_t *retlen, u_char *buf);
+ int (*_write_user_prot_reg) (struct mtd_info *mtd, loff_t to,
+ size_t len, size_t *retlen, u_char *buf);
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*lock) (struct mtd_info *mtd, loff_t ofs, size_t len);
- int (*unlock) (struct mtd_info *mtd, loff_t ofs, size_t len);
- int (*suspend) (struct mtd_info *mtd);
- void (*resume) (struct mtd_info *mtd);
+ int (*_lock_user_prot_reg) (struct mtd_info *mtd, loff_t from,
+ size_t len);
+ int (*_writev) (struct mtd_info *mtd, const struct kvec *vecs,
+ unsigned long count, loff_t to, size_t *retlen);
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int (*block_isbad) (struct mtd_info *mtd, loff_t ofs);
- int (*block_markbad) (struct mtd_info *mtd, loff_t ofs);
+ void (*_sync) (struct mtd_info *mtd);
+ int (*_lock) (struct mtd_info *mtd, loff_t ofs, uint64_t len);
+ int (*_unlock) (struct mtd_info *mtd, loff_t ofs, uint64_t len);
+ int (*_is_locked) (struct mtd_info *mtd, loff_t ofs, uint64_t len);
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ int (*_block_isbad) (struct mtd_info *mtd, loff_t ofs);
+ int (*_block_markbad) (struct mtd_info *mtd, loff_t ofs);
+ int (*_suspend) (struct mtd_info *mtd);
+ void (*_resume) (struct mtd_info *mtd);
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ int (*_get_device) (struct mtd_info *mtd);
+ void (*_put_device) (struct mtd_info *mtd);
+ struct backing_dev_info *backing_dev_info;
  struct notifier_block reboot_notifier;
- struct mtd_ecc_stats ecc_stats;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct mtd_ecc_stats ecc_stats;
+ int subpage_sft;
  void *priv;
  struct module *owner;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct device dev;
  int usecount;
 };
+struct mtd_partition;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct mtd_part_parser_data;
+#define mtd_device_register(master, parts, nr_parts)   mtd_device_parse_register(master, NULL, NULL, parts, nr_parts)
 struct mtd_notifier {
  void (*add)(struct mtd_info *mtd);
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  void (*remove)(struct mtd_info *mtd);
- struct list_head list;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
-#define MTD_DEBUG_LEVEL0 (0)
-#define MTD_DEBUG_LEVEL1 (1)
-#define MTD_DEBUG_LEVEL2 (2)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define MTD_DEBUG_LEVEL3 (3)
-#define DEBUG(n, args...) do { } while(0)
 #endif

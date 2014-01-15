@@ -18,19 +18,14 @@
  ****************************************************************************/
 #ifndef __LINUX_NFSACL_H
 #define __LINUX_NFSACL_H
-#define NFS_ACL_PROGRAM 100227
-#define ACLPROC2_GETACL 1
+#include <linux/posix_acl.h>
+#include <linux/sunrpc/xdr.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define ACLPROC2_SETACL 2
-#define ACLPROC2_GETATTR 3
-#define ACLPROC2_ACCESS 4
-#define ACLPROC3_GETACL 1
+#include <uapi/linux/nfsacl.h>
+#define NFS_ACL_MAX_ENTRIES 1024
+#define NFSACL_MAXWORDS (2*(2+3*NFS_ACL_MAX_ENTRIES))
+#define NFSACL_MAXPAGES ((2*(8+12*NFS_ACL_MAX_ENTRIES) + PAGE_SIZE-1)   >> PAGE_SHIFT)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define ACLPROC3_SETACL 2
-#define NFS_ACL 0x0001
-#define NFS_ACLCNT 0x0002
-#define NFS_DFACL 0x0004
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define NFS_DFACLCNT 0x0008
-#define NFS_ACL_DEFAULT 0x1000
+#define NFS_ACL_MAX_ENTRIES_INLINE (5)
+#define NFS_ACL_INLINE_BUFSIZE ((2*(2+3*NFS_ACL_MAX_ENTRIES_INLINE)) << 2)
 #endif

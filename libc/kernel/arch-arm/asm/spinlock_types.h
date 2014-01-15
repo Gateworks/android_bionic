@@ -22,14 +22,29 @@
 #error "please don't include this file directly"
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
+#define TICKET_SHIFT 16
+typedef struct {
+ union {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ u32 slock;
+ struct __raw_tickets {
+#ifdef __ARMEB__
+ u16 next;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ u16 owner;
+#else
+ u16 owner;
+ u16 next;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#endif
+ } tickets;
+ };
+} arch_spinlock_t;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define __ARCH_SPIN_LOCK_UNLOCKED { { 0 } }
 typedef struct {
  volatile unsigned int lock;
-} raw_spinlock_t;
+} arch_rwlock_t;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define __RAW_SPIN_LOCK_UNLOCKED { 0 }
-typedef struct {
- volatile unsigned int lock;
-} raw_rwlock_t;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define __RAW_RW_LOCK_UNLOCKED { 0 }
+#define __ARCH_RW_LOCK_UNLOCKED { 0 }
 #endif

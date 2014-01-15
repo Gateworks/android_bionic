@@ -22,10 +22,10 @@
 #error "please don't include this file directly"
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
-typedef struct { } raw_spinlock_t;
-#define __RAW_SPIN_LOCK_UNLOCKED { }
+typedef struct { } arch_spinlock_t;
+#define __ARCH_SPIN_LOCK_UNLOCKED { }
 typedef struct {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-} raw_rwlock_t;
-#define __RAW_RW_LOCK_UNLOCKED { }
+} arch_rwlock_t;
+#define __ARCH_RW_LOCK_UNLOCKED { }
 #endif

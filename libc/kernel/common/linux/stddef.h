@@ -18,7 +18,7 @@
  ****************************************************************************/
 #ifndef _LINUX_STDDEF_H
 #define _LINUX_STDDEF_H
-#include <linux/compiler.h>
+#include <uapi/linux/stddef.h>
 #undef NULL
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #ifdef __cplusplus

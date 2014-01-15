@@ -18,4 +18,13 @@
  ****************************************************************************/
 #ifndef _LINUX_PNP_H
 #define _LINUX_PNP_H
+#include <linux/device.h>
+#include <linux/list.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/errno.h>
+#include <linux/mod_devicetable.h>
+#define PNP_NAME_LEN 50
+struct pnp_protocol;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct pnp_dev;
 #endif

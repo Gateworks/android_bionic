@@ -19,7 +19,11 @@
 #ifndef __ASM_ARM_ATOMIC_H
 #define __ASM_ARM_ATOMIC_H
 #include <linux/compiler.h>
-typedef struct { volatile int counter; } atomic_t;
+#include <linux/types.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/irqflags.h>
+#include <asm/barrier.h>
+#include <asm/cmpxchg.h>
 #define ATOMIC_INIT(i) { (i) }
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif

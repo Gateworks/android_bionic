@@ -16,8 +16,4 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef __ARM_CPUTIME_H
-#define __ARM_CPUTIME_H
 #include <asm-generic/cputime.h>
-#endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

@@ -21,5 +21,5 @@
 #include <linux/taskstats.h>
 #include <linux/sched.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#include <net/genetlink.h>
+#include <linux/slab.h>
 #endif

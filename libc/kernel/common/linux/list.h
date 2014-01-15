@@ -16,8 +16,11 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef _LINUX_LIST_H
-#define _LINUX_LIST_H
-#warning "don't include kernel headers in userspace"
-#endif
+#ifndef _LINUX_LIST_H_
+#define _LINUX_LIST_H_
+#include <linux/types.h>
+#include <linux/stddef.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/poison.h>
+#include <linux/const.h>
+#endif

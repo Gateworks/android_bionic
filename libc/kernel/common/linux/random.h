@@ -18,19 +18,8 @@
  ****************************************************************************/
 #ifndef _LINUX_RANDOM_H
 #define _LINUX_RANDOM_H
-#include <linux/ioctl.h>
-#define RNDGETENTCNT _IOR( 'R', 0x00, int )
+#include <uapi/linux/random.h>
+#ifndef MODULE
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define RNDADDTOENTCNT _IOW( 'R', 0x01, int )
-#define RNDGETPOOL _IOR( 'R', 0x02, int [2] )
-#define RNDADDENTROPY _IOW( 'R', 0x03, int [2] )
-#define RNDZAPENTCNT _IO( 'R', 0x04 )
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define RNDCLEARPOOL _IO( 'R', 0x06 )
-struct rand_pool_info {
- int entropy_count;
- int buf_size;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- __u32 buf[0];
-};
+#endif
 #endif

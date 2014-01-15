@@ -18,7 +18,8 @@
  ****************************************************************************/
 #ifndef _ASMARM_TIMEX_H
 #define _ASMARM_TIMEX_H
-#include <asm/arch/timex.h>
+#include <asm/mach/timex.h>
 typedef unsigned long cycles_t;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define get_cycles() ({ cycles_t c; read_current_timer(&c) ? 0 : c; })
 #endif

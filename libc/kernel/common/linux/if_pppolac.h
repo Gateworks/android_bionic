@@ -18,17 +18,6 @@
  ****************************************************************************/
 #ifndef __LINUX_IF_PPPOLAC_H
 #define __LINUX_IF_PPPOLAC_H
-#include <linux/socket.h>
-#include <linux/types.h>
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct sockaddr_pppolac {
- sa_family_t sa_family;
- unsigned int sa_protocol;
- int udp_socket;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct __attribute__((packed)) {
- __u16 tunnel, session;
- } local, remote;
-} __attribute__((packed));
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <uapi/linux/if_pppolac.h>
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

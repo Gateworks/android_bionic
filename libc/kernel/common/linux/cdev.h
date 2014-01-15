@@ -18,4 +18,22 @@
  ****************************************************************************/
 #ifndef _LINUX_CDEV_H
 #define _LINUX_CDEV_H
+#include <linux/kobject.h>
+#include <linux/kdev_t.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/list.h>
+struct file_operations;
+struct inode;
+struct module;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct cdev {
+ struct kobject kobj;
+ struct module *owner;
+ const struct file_operations *ops;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ dev_t dev;
+ unsigned int count;
+};
+struct cdev *cdev_alloc(void);
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif

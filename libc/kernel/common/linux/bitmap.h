@@ -23,7 +23,11 @@
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #include <linux/bitops.h>
 #include <linux/string.h>
+#include <linux/kernel.h>
+#define BITMAP_FIRST_WORD_MASK(start) (~0UL << ((start) % BITS_PER_LONG))
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define BITMAP_LAST_WORD_MASK(nbits)  (   ((nbits) % BITS_PER_LONG) ?   (1UL<<((nbits) % BITS_PER_LONG))-1 : ~0UL  )
+#define small_const_nbits(nbits)   (__builtin_constant_p(nbits) && (nbits) <= BITS_PER_LONG)
+#endif
 #endif
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#endif

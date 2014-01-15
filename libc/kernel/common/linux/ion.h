@@ -19,55 +19,31 @@
 #ifndef _LINUX_ION_H
 #define _LINUX_ION_H
 #include <linux/types.h>
+#include "../uapi/ion.h"
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct ion_handle;
+struct ion_device;
+struct ion_heap;
+struct ion_mapper;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-enum ion_heap_type {
- ION_HEAP_TYPE_SYSTEM,
- ION_HEAP_TYPE_SYSTEM_CONTIG,
- ION_HEAP_TYPE_CARVEOUT,
+struct ion_client;
+struct ion_buffer;
+#define ion_phys_addr_t unsigned long
+struct ion_platform_heap {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- ION_HEAP_TYPE_CUSTOM,
- ION_NUM_HEAPS,
-};
-#define ION_HEAP_SYSTEM_MASK (1 << ION_HEAP_TYPE_SYSTEM)
+ enum ion_heap_type type;
+ unsigned int id;
+ const char *name;
+ ion_phys_addr_t base;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define ION_HEAP_SYSTEM_CONTIG_MASK (1 << ION_HEAP_TYPE_SYSTEM_CONTIG)
-#define ION_HEAP_CARVEOUT_MASK (1 << ION_HEAP_TYPE_CARVEOUT)
-struct ion_allocation_data {
- size_t len;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- size_t align;
- unsigned int flags;
- struct ion_handle *handle;
+ size_t size;
+ ion_phys_addr_t align;
+ void *priv;
 };
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct ion_fd_data {
- struct ion_handle *handle;
- int fd;
+struct ion_platform_data {
+ int nr;
+ struct ion_platform_heap *heaps;
 };
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct ion_phys_data {
- struct ion_handle *handle;
- unsigned long phys;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct ion_handle_data {
- struct ion_handle *handle;
-};
-struct ion_custom_data {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned int cmd;
- unsigned long arg;
-};
-#define ION_IOC_MAGIC 'I'
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define ION_IOC_ALLOC _IOWR(ION_IOC_MAGIC, 0,   struct ion_allocation_data)
-#define ION_IOC_FREE _IOWR(ION_IOC_MAGIC, 1, struct ion_handle_data)
-#define ION_IOC_MAP _IOWR(ION_IOC_MAGIC, 2, struct ion_fd_data)
-#define ION_IOC_SHARE _IOWR(ION_IOC_MAGIC, 4, struct ion_fd_data)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define ION_IOC_IMPORT _IOWR(ION_IOC_MAGIC, 5, int)
-#define ION_IOC_CUSTOM _IOWR(ION_IOC_MAGIC, 6, struct ion_custom_data)
-#define ION_IOC_PHYS _IOWR(ION_IOC_MAGIC, 7, struct ion_phys_data)
 #endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

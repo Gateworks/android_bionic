@@ -18,6 +18,4 @@
  ****************************************************************************/
 #ifndef _ASMARM_TLBFLUSH_H
 #define _ASMARM_TLBFLUSH_H
-#define tlb_flush(tlb) ((void) tlb)
 #endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

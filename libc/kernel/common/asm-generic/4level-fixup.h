@@ -36,10 +36,15 @@
 #define pud_ERROR(pud) do { } while (0)
 #define pud_clear(pud) pgd_clear(pud)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define pud_val(pud) pgd_val(pud)
+#define pud_populate(mm, pud, pmd) pgd_populate(mm, pud, pmd)
+#define pud_page(pud) pgd_page(pud)
+#define pud_page_vaddr(pud) pgd_page_vaddr(pud)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #undef pud_free_tlb
-#define pud_free_tlb(tlb, x) do { } while (0)
-#define pud_free(x) do { } while (0)
-#define __pud_free_tlb(tlb, x) do { } while (0)
+#define pud_free_tlb(tlb, x, addr) do { } while (0)
+#define pud_free(mm, x) do { } while (0)
+#define __pud_free_tlb(tlb, x, addr) do { } while (0)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #undef pud_addr_end
 #define pud_addr_end(addr, end) (end)

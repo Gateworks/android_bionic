@@ -18,50 +18,20 @@
  ****************************************************************************/
 #ifndef __ARCH_ARM_POSIX_TYPES_H
 #define __ARCH_ARM_POSIX_TYPES_H
-typedef unsigned long __kernel_ino_t;
 typedef unsigned short __kernel_mode_t;
+#define __kernel_mode_t __kernel_mode_t
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 typedef unsigned short __kernel_nlink_t;
-typedef long __kernel_off_t;
-typedef int __kernel_pid_t;
 typedef unsigned short __kernel_ipc_pid_t;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define __kernel_ipc_pid_t __kernel_ipc_pid_t
 typedef unsigned short __kernel_uid_t;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 typedef unsigned short __kernel_gid_t;
-typedef unsigned int __kernel_size_t;
-typedef int __kernel_ssize_t;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-typedef int __kernel_ptrdiff_t;
-typedef long __kernel_time_t;
-typedef long __kernel_suseconds_t;
-typedef long __kernel_clock_t;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-typedef int __kernel_timer_t;
-typedef int __kernel_clockid_t;
-typedef int __kernel_daddr_t;
-typedef char * __kernel_caddr_t;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-typedef unsigned short __kernel_uid16_t;
-typedef unsigned short __kernel_gid16_t;
-typedef unsigned int __kernel_uid32_t;
-typedef unsigned int __kernel_gid32_t;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-typedef unsigned short __kernel_old_uid_t;
-typedef unsigned short __kernel_old_gid_t;
+#define __kernel_uid_t __kernel_uid_t
 typedef unsigned short __kernel_old_dev_t;
-#ifdef __GNUC__
+#define __kernel_old_dev_t __kernel_old_dev_t
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-typedef long long __kernel_loff_t;
-#endif
-typedef struct {
-#ifdef __USE_ALL
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int val[2];
-#else
- int __val[2];
-#endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-} __kernel_fsid_t;
+#include <asm-generic/posix_types.h>
 #if !defined(__GLIBC__) || __GLIBC__ < 2
 #undef __FD_SET
 #define __FD_SET(fd, fdsetp)   (((fd_set *)(fdsetp))->fds_bits[(fd) >> 5] |= (1<<((fd) & 31)))

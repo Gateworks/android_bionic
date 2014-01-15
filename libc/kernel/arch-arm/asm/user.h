@@ -52,7 +52,7 @@ struct user{
  long int signal;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  int reserved;
- struct pt_regs * u_ar0;
+ unsigned long u_ar0;
  unsigned long magic;
  char u_comm[32];
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

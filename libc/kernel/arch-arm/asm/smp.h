@@ -22,15 +22,17 @@
 #include <linux/cpumask.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #include <linux/thread_info.h>
-#include <asm/arch/smp.h>
-#error "<asm-arm/smp.h> included in non-SMP build"
+#error "<asm/smp.h> included in non-SMP build"
 #define raw_smp_processor_id() (current_thread_info()->cpu)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define PROC_CHANGE_PENALTY 15
 struct seq_file;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct secondary_data {
  unsigned long pgdir;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ unsigned long swapper_pg_dir;
  void *stack;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+};
+struct smp_operations {
 };
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

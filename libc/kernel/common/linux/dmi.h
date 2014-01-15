@@ -1,0 +1,115 @@
+/****************************************************************************
+ ****************************************************************************
+ ***
+ ***   This header was automatically generated from a Linux kernel header
+ ***   of the same name, to make information necessary for userspace to
+ ***   call into the kernel available to libc.  It contains only constants,
+ ***   structures, and macros generated from the original header, and thus,
+ ***   contains no copyrightable information.
+ ***
+ ***   To edit the content of this header, modify the corresponding
+ ***   source file (e.g. under external/kernel-headers/original/) then
+ ***   run bionic/libc/kernel/tools/update_all.py
+ ***
+ ***   Any manual change here will be lost the next time this script will
+ ***   be run. You've been warned!
+ ***
+ ****************************************************************************
+ ****************************************************************************/
+#ifndef __DMI_H__
+#define __DMI_H__
+#include <linux/list.h>
+#include <linux/mod_devicetable.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+enum dmi_device_type {
+ DMI_DEV_TYPE_ANY = 0,
+ DMI_DEV_TYPE_OTHER,
+ DMI_DEV_TYPE_UNKNOWN,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_DEV_TYPE_VIDEO,
+ DMI_DEV_TYPE_SCSI,
+ DMI_DEV_TYPE_ETHERNET,
+ DMI_DEV_TYPE_TOKENRING,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_DEV_TYPE_SOUND,
+ DMI_DEV_TYPE_PATA,
+ DMI_DEV_TYPE_SATA,
+ DMI_DEV_TYPE_SAS,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_DEV_TYPE_IPMI = -1,
+ DMI_DEV_TYPE_OEM_STRING = -2,
+ DMI_DEV_TYPE_DEV_ONBOARD = -3,
+};
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+enum dmi_entry_type {
+ DMI_ENTRY_BIOS = 0,
+ DMI_ENTRY_SYSTEM,
+ DMI_ENTRY_BASEBOARD,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_ENTRY_CHASSIS,
+ DMI_ENTRY_PROCESSOR,
+ DMI_ENTRY_MEM_CONTROLLER,
+ DMI_ENTRY_MEM_MODULE,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_ENTRY_CACHE,
+ DMI_ENTRY_PORT_CONNECTOR,
+ DMI_ENTRY_SYSTEM_SLOT,
+ DMI_ENTRY_ONBOARD_DEVICE,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_ENTRY_OEMSTRINGS,
+ DMI_ENTRY_SYSCONF,
+ DMI_ENTRY_BIOS_LANG,
+ DMI_ENTRY_GROUP_ASSOC,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_ENTRY_SYSTEM_EVENT_LOG,
+ DMI_ENTRY_PHYS_MEM_ARRAY,
+ DMI_ENTRY_MEM_DEVICE,
+ DMI_ENTRY_32_MEM_ERROR,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_ENTRY_MEM_ARRAY_MAPPED_ADDR,
+ DMI_ENTRY_MEM_DEV_MAPPED_ADDR,
+ DMI_ENTRY_BUILTIN_POINTING_DEV,
+ DMI_ENTRY_PORTABLE_BATTERY,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_ENTRY_SYSTEM_RESET,
+ DMI_ENTRY_HW_SECURITY,
+ DMI_ENTRY_SYSTEM_POWER_CONTROLS,
+ DMI_ENTRY_VOLTAGE_PROBE,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_ENTRY_COOLING_DEV,
+ DMI_ENTRY_TEMP_PROBE,
+ DMI_ENTRY_ELECTRICAL_CURRENT_PROBE,
+ DMI_ENTRY_OOB_REMOTE_ACCESS,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_ENTRY_BIS_ENTRY,
+ DMI_ENTRY_SYSTEM_BOOT,
+ DMI_ENTRY_MGMT_DEV,
+ DMI_ENTRY_MGMT_DEV_COMPONENT,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_ENTRY_MGMT_DEV_THRES,
+ DMI_ENTRY_MEM_CHANNEL,
+ DMI_ENTRY_IPMI_DEV,
+ DMI_ENTRY_SYS_POWER_SUPPLY,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_ENTRY_ADDITIONAL,
+ DMI_ENTRY_ONBOARD_DEV_EXT,
+ DMI_ENTRY_MGMT_CONTROLLER_HOST,
+ DMI_ENTRY_INACTIVE = 126,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ DMI_ENTRY_END_OF_TABLE = 127,
+};
+struct dmi_header {
+ u8 type;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ u8 length;
+ u16 handle;
+};
+struct dmi_device {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ int type;
+ const char *name;
+ void *device_data;
+};
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define dmi_available 0
+#endif

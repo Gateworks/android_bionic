@@ -18,7 +18,9 @@
  ****************************************************************************/
 #ifndef __ASMARM_CACHE_H
 #define __ASMARM_CACHE_H
-#define L1_CACHE_SHIFT 5
+#define L1_CACHE_SHIFT CONFIG_ARM_L1_CACHE_SHIFT
 #define L1_CACHE_BYTES (1 << L1_CACHE_SHIFT)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define ARCH_DMA_MINALIGN L1_CACHE_BYTES
+#define __read_mostly __attribute__((__section__(".data..read_mostly")))
 #endif

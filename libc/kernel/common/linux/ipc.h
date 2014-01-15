@@ -18,34 +18,27 @@
  ****************************************************************************/
 #ifndef _LINUX_IPC_H
 #define _LINUX_IPC_H
-#include <linux/types.h>
-#define IPC_PRIVATE ((__kernel_key_t) 0)
+#include <linux/spinlock.h>
+#include <linux/uidgid.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct ipc_perm
+#include <uapi/linux/ipc.h>
+#define IPCMNI 32768
+struct kern_ipc_perm
 {
- __kernel_key_t key;
- __kernel_uid_t uid;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- __kernel_gid_t gid;
- __kernel_uid_t cuid;
- __kernel_gid_t cgid;
- __kernel_mode_t mode;
+ spinlock_t lock;
+ int deleted;
+ int id;
+ key_t key;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned short seq;
+ kuid_t uid;
+ kgid_t gid;
+ kuid_t cuid;
+ kgid_t cgid;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ umode_t mode;
+ unsigned long seq;
+ void *security;
 };
-#include <asm/ipcbuf.h>
-#define IPC_CREAT 00001000
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define IPC_EXCL 00002000
-#define IPC_NOWAIT 00004000
-#define IPC_DIPC 00010000
-#define IPC_OWN 00020000
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define IPC_RMID 0
-#define IPC_SET 1
-#define IPC_STAT 2
-#define IPC_INFO 3
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define IPC_OLD 0
-#define IPC_64 0x0100
 #endif

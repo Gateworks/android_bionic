@@ -16,8 +16,13 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef _ASMARM_SIGINFO_H
-#define _ASMARM_SIGINFO_H
-#include <asm-generic/siginfo.h>
+#ifndef _ASM_GENERIC_SIGINFO_H
+#define _ASM_GENERIC_SIGINFO_H
+#include <uapi/asm-generic/siginfo.h>
+struct siginfo;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#ifndef HAVE_ARCH_COPY_SIGINFO
+#include <linux/string.h>
+#endif
 #endif
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

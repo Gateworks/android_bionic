@@ -18,4 +18,14 @@
  ****************************************************************************/
 #ifndef _KREF_H_
 #define _KREF_H_
+#include <linux/bug.h>
+#include <linux/atomic.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/kernel.h>
+#include <linux/mutex.h>
+#include <linux/spinlock.h>
+struct kref {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ atomic_t refcount;
+};
 #endif

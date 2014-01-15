@@ -22,5 +22,8 @@
 #error "please don't include this file directly"
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
-#define assert_spin_locked(x) BUG_ON(!spin_is_locked(x))
+#define assert_raw_spin_locked(x) BUG_ON(!raw_spin_is_locked(x))
+#define _raw_spin_unlock(lock) __raw_spin_unlock(lock)
+#include <linux/rwlock_api_smp.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif

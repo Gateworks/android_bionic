@@ -18,54 +18,58 @@
  ****************************************************************************/
 #ifndef _SERIO_H
 #define _SERIO_H
-#include <linux/ioctl.h>
-#define SPIOCSTYPE _IOW('q', 0x01, unsigned long)
+#include <linux/types.h>
+#include <linux/interrupt.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define SERIO_TIMEOUT 1
-#define SERIO_PARITY 2
-#define SERIO_FRAME 4
-#define SERIO_XT 0x00
+#include <linux/list.h>
+#include <linux/spinlock.h>
+#include <linux/mutex.h>
+#include <linux/device.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define SERIO_8042 0x01
-#define SERIO_RS232 0x02
-#define SERIO_HIL_MLC 0x03
-#define SERIO_PS_PSTHRU 0x05
+#include <linux/mod_devicetable.h>
+#include <uapi/linux/serio.h>
+struct serio {
+ void *port_data;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define SERIO_8042_XL 0x06
-#define SERIO_UNKNOWN 0x00
-#define SERIO_MSC 0x01
-#define SERIO_SUN 0x02
+ char name[32];
+ char phys[32];
+ bool manual_bind;
+ struct serio_device_id id;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define SERIO_MS 0x03
-#define SERIO_MP 0x04
-#define SERIO_MZ 0x05
-#define SERIO_MZP 0x06
+ spinlock_t lock;
+ int (*write)(struct serio *, unsigned char);
+ int (*open)(struct serio *);
+ void (*close)(struct serio *);
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define SERIO_MZPP 0x07
-#define SERIO_VSXXXAA 0x08
-#define SERIO_SUNKBD 0x10
-#define SERIO_WARRIOR 0x18
+ int (*start)(struct serio *);
+ void (*stop)(struct serio *);
+ struct serio *parent;
+ unsigned int depth;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define SERIO_SPACEORB 0x19
-#define SERIO_MAGELLAN 0x1a
-#define SERIO_SPACEBALL 0x1b
-#define SERIO_GUNZE 0x1c
+ struct serio_driver *drv;
+ struct mutex drv_mutex;
+ struct device dev;
+};
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define SERIO_IFORCE 0x1d
-#define SERIO_STINGER 0x1e
-#define SERIO_NEWTON 0x1f
-#define SERIO_STOWAWAY 0x20
+#define to_serio_port(d) container_of(d, struct serio, dev)
+struct serio_driver {
+ const char *description;
+ const struct serio_device_id *id_table;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define SERIO_H3600 0x21
-#define SERIO_PS2SER 0x22
-#define SERIO_TWIDKBD 0x23
-#define SERIO_TWIDJOY 0x24
+ bool manual_bind;
+ void (*write_wakeup)(struct serio *);
+ irqreturn_t (*interrupt)(struct serio *, unsigned char, unsigned int);
+ int (*connect)(struct serio *, struct serio_driver *drv);
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define SERIO_HIL 0x25
-#define SERIO_SNES232 0x26
-#define SERIO_SEMTECH 0x27
-#define SERIO_LKKBD 0x28
+ int (*reconnect)(struct serio *);
+ void (*disconnect)(struct serio *);
+ void (*cleanup)(struct serio *);
+ struct device_driver driver;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define SERIO_ELO 0x29
-#define SERIO_MICROTOUCH 0x30
+};
+#define to_serio_driver(d) container_of(d, struct serio_driver, driver)
+#define serio_register_port(serio)   __serio_register_port(serio, THIS_MODULE)
+#define serio_register_driver(drv)   __serio_register_driver(drv, THIS_MODULE, KBUILD_MODNAME)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define module_serio_driver(__serio_driver)   module_driver(__serio_driver, serio_register_driver,   serio_unregister_driver)
 #endif

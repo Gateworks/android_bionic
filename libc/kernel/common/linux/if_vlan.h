@@ -18,51 +18,46 @@
  ****************************************************************************/
 #ifndef _LINUX_IF_VLAN_H_
 #define _LINUX_IF_VLAN_H_
-enum vlan_ioctl_cmds {
- ADD_VLAN_CMD,
+#include <linux/netdevice.h>
+#include <linux/etherdevice.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- DEL_VLAN_CMD,
- SET_VLAN_INGRESS_PRIORITY_CMD,
- SET_VLAN_EGRESS_PRIORITY_CMD,
- GET_VLAN_INGRESS_PRIORITY_CMD,
+#include <linux/rtnetlink.h>
+#include <linux/bug.h>
+#include <uapi/linux/if_vlan.h>
+#define VLAN_HLEN 4
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- GET_VLAN_EGRESS_PRIORITY_CMD,
- SET_VLAN_NAME_TYPE_CMD,
- SET_VLAN_FLAG_CMD,
- GET_VLAN_REALDEV_NAME_CMD,
+#define VLAN_ETH_HLEN 18
+#define VLAN_ETH_ZLEN 64
+#define VLAN_ETH_DATA_LEN 1500
+#define VLAN_ETH_FRAME_LEN 1518
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- GET_VLAN_VID_CMD
+struct vlan_hdr {
+ __be16 h_vlan_TCI;
+ __be16 h_vlan_encapsulated_proto;
 };
-enum vlan_flags {
- VLAN_FLAG_REORDER_HDR = 0x1,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- VLAN_FLAG_GVRP = 0x2,
- VLAN_FLAG_LOOSE_BINDING = 0x4,
+struct vlan_ethhdr {
+ unsigned char h_dest[ETH_ALEN];
+ unsigned char h_source[ETH_ALEN];
+ __be16 h_vlan_proto;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ __be16 h_vlan_TCI;
+ __be16 h_vlan_encapsulated_proto;
 };
-enum vlan_name_types {
+#include <linux/skbuff.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- VLAN_NAME_TYPE_PLUS_VID,
- VLAN_NAME_TYPE_RAW_PLUS_VID,
- VLAN_NAME_TYPE_PLUS_VID_NO_PAD,
- VLAN_NAME_TYPE_RAW_PLUS_VID_NO_PAD,
+#define VLAN_PRIO_MASK 0xe000
+#define VLAN_PRIO_SHIFT 13
+#define VLAN_CFI_MASK 0x1000
+#define VLAN_TAG_PRESENT VLAN_CFI_MASK
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- VLAN_NAME_TYPE_HIGHEST
-};
-struct vlan_ioctl_args {
- int cmd;
+#define VLAN_VID_MASK 0x0fff
+#define VLAN_N_VID 4096
+#define vlan_tx_tag_present(__skb) ((__skb)->vlan_tci & VLAN_TAG_PRESENT)
+#define vlan_tx_tag_get(__skb) ((__skb)->vlan_tci & ~VLAN_TAG_PRESENT)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- char device1[24];
- union {
- char device2[24];
- int VID;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned int skb_priority;
- unsigned int name_type;
- unsigned int bind_type;
- unsigned int flag;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- } u;
- short vlan_qos;
-};
+#define vlan_tx_tag_get_id(__skb) ((__skb)->vlan_tci & VLAN_VID_MASK)
+#define HAVE_VLAN_PUT_TAG
+#define HAVE_VLAN_GET_TAG
 #endif
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

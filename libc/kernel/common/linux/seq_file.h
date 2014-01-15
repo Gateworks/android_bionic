@@ -18,4 +18,19 @@
  ****************************************************************************/
 #ifndef _LINUX_SEQ_FILE_H
 #define _LINUX_SEQ_FILE_H
+#include <linux/types.h>
+#include <linux/string.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/bug.h>
+#include <linux/mutex.h>
+#include <linux/cpumask.h>
+#include <linux/nodemask.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct seq_operations;
+struct file;
+struct path;
+struct inode;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct dentry;
+struct user_namespace;
 #endif

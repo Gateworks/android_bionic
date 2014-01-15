@@ -16,12 +16,17 @@
  ***
  ****************************************************************************
  ****************************************************************************/
+#ifndef _LINUX_CONSOLE_STRUCT_H
+#define _LINUX_CONSOLE_STRUCT_H
 #include <linux/wait.h>
 #include <linux/vt.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/workqueue.h>
 struct vt_struct;
 #define NPAR 16
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct vc_data {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct tty_port port;
  unsigned short vc_num;
  unsigned int vc_cols;
  unsigned int vc_rows;
@@ -44,25 +49,25 @@ struct vc_data {
  unsigned char vc_color;
  unsigned char vc_s_color;
  unsigned char vc_ulcolor;
- unsigned char vc_halfcolor;
+ unsigned char vc_itcolor;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ unsigned char vc_halfcolor;
  unsigned int vc_cursor_type;
  unsigned short vc_complement_mask;
  unsigned short vc_s_complement_mask;
- unsigned int vc_x, vc_y;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ unsigned int vc_x, vc_y;
  unsigned int vc_saved_x, vc_saved_y;
  unsigned long vc_pos;
  unsigned short vc_hi_font_mask;
- struct console_font vc_font;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct console_font vc_font;
  unsigned short vc_video_erase_char;
  unsigned int vc_state;
  unsigned int vc_npar,vc_par[NPAR];
- struct tty_struct *vc_tty;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  struct vt_mode vt_mode;
- int vt_pid;
+ struct pid *vt_pid;
  int vt_newvt;
  wait_queue_head_t paste_wait;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
@@ -79,56 +84,61 @@ struct vc_data {
  unsigned int vc_decim : 1;
  unsigned int vc_deccolm : 1;
  unsigned int vc_intensity : 2;
- unsigned int vc_underline : 1;
+ unsigned int vc_italic:1;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ unsigned int vc_underline : 1;
  unsigned int vc_blink : 1;
  unsigned int vc_reverse : 1;
  unsigned int vc_s_intensity : 2;
- unsigned int vc_s_underline : 1;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ unsigned int vc_s_italic:1;
+ unsigned int vc_s_underline : 1;
  unsigned int vc_s_blink : 1;
  unsigned int vc_s_reverse : 1;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  unsigned int vc_ques : 1;
  unsigned int vc_need_wrap : 1;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  unsigned int vc_can_do_color : 1;
  unsigned int vc_report_mouse : 2;
- unsigned int vc_kmalloced : 1;
- unsigned char vc_utf : 1;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ unsigned char vc_utf : 1;
  unsigned char vc_utf_count;
  int vc_utf_char;
  unsigned int vc_tab_stop[8];
- unsigned char vc_palette[16*3];
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ unsigned char vc_palette[16*3];
  unsigned short * vc_translate;
  unsigned char vc_G0_charset;
  unsigned char vc_G1_charset;
- unsigned char vc_saved_G0;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ unsigned char vc_saved_G0;
  unsigned char vc_saved_G1;
+ unsigned int vc_resize_user;
  unsigned int vc_bell_pitch;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  unsigned int vc_bell_duration;
  struct vc_data **vc_display_fg;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  unsigned long vc_uni_pagedir;
  unsigned long *vc_uni_pagedir_loc;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ bool vc_panic_force_write;
 };
 struct vc {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  struct vc_data *d;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 #define CUR_DEF 0
 #define CUR_NONE 1
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define CUR_UNDERLINE 2
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define CUR_LOWER_THIRD 3
 #define CUR_LOWER_HALF 4
 #define CUR_TWO_THIRDS 5
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define CUR_BLOCK 6
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define CUR_HWMASK 0x0f
 #define CUR_SWMASK 0xfff0
 #define CUR_DEFAULT CUR_UNDERLINE
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define CON_IS_VISIBLE(conp) (*conp->vc_display_fg == conp)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#endif

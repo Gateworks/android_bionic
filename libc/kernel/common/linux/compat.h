@@ -18,4 +18,6 @@
  ****************************************************************************/
 #ifndef _LINUX_COMPAT_H
 #define _LINUX_COMPAT_H
+#define is_compat_task() (0)
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

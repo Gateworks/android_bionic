@@ -18,26 +18,69 @@
  ****************************************************************************/
 #ifndef _LINUX_CPU_H_
 #define _LINUX_CPU_H_
-#include <linux/sysdev.h>
 #include <linux/node.h>
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #include <linux/compiler.h>
-#include <linux/cpumask.h>
-#include <asm/semaphore.h>
-struct cpu {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/cpumask.h>
+struct device;
+struct cpu {
  int node_id;
- int no_control;
- struct sys_device sysdev;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ int hotpluggable;
+ struct device dev;
+};
+struct notifier_block;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+enum {
+ CPU_PRI_SCHED_ACTIVE = INT_MAX,
+ CPU_PRI_CPUSET_ACTIVE = INT_MAX - 1,
+ CPU_PRI_SCHED_INACTIVE = INT_MIN + 1,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ CPU_PRI_CPUSET_INACTIVE = INT_MIN,
+ CPU_PRI_PERF = 20,
+ CPU_PRI_MIGRATION = 10,
+ CPU_PRI_WORKQUEUE_UP = 5,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ CPU_PRI_WORKQUEUE_DOWN = -5,
+};
+#define CPU_ONLINE 0x0002
+#define CPU_UP_PREPARE 0x0003
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define CPU_UP_CANCELED 0x0004
+#define CPU_DOWN_PREPARE 0x0005
+#define CPU_DOWN_FAILED 0x0006
+#define CPU_DEAD 0x0007
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define CPU_DYING 0x0008
+#define CPU_POST_DEAD 0x0009
+#define CPU_STARTING 0x000A
+#define CPU_TASKS_FROZEN 0x0010
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define CPU_ONLINE_FROZEN (CPU_ONLINE | CPU_TASKS_FROZEN)
+#define CPU_UP_PREPARE_FROZEN (CPU_UP_PREPARE | CPU_TASKS_FROZEN)
+#define CPU_UP_CANCELED_FROZEN (CPU_UP_CANCELED | CPU_TASKS_FROZEN)
+#define CPU_DOWN_PREPARE_FROZEN (CPU_DOWN_PREPARE | CPU_TASKS_FROZEN)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define CPU_DOWN_FAILED_FROZEN (CPU_DOWN_FAILED | CPU_TASKS_FROZEN)
+#define CPU_DEAD_FROZEN (CPU_DEAD | CPU_TASKS_FROZEN)
+#define CPU_DYING_FROZEN (CPU_DYING | CPU_TASKS_FROZEN)
+#define CPU_STARTING_FROZEN (CPU_STARTING | CPU_TASKS_FROZEN)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define cpu_notifier(fn, pri) do { (void)(fn); } while (0)
+#define get_online_cpus() do { } while (0)
+#define put_online_cpus() do { } while (0)
+#define cpu_hotplug_disable() do { } while (0)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define cpu_hotplug_enable() do { } while (0)
+#define hotcpu_notifier(fn, pri) do { (void)(fn); } while (0)
+#define register_hotcpu_notifier(nb) ({ (void)(nb); 0; })
+#define unregister_hotcpu_notifier(nb) ({ (void)(nb); })
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+enum cpuhp_state {
+ CPUHP_OFFLINE,
+ CPUHP_ONLINE,
 };
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct notifier_block;
-#define lock_cpu_hotplug() do { } while (0)
-#define unlock_cpu_hotplug() do { } while (0)
-#define lock_cpu_hotplug_interruptible() 0
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define hotcpu_notifier(fn, pri) do { } while (0)
-#define register_hotcpu_notifier(nb) do { } while (0)
-#define unregister_hotcpu_notifier(nb) do { } while (0)
+#define IDLE_START 1
+#define IDLE_END 2
 #endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

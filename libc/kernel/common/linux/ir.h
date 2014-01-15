@@ -1,48 +1,40 @@
-/*
- * Copyright (C) 2005-2013 Freescale Semiconductor, Inc. All Rights Reserved.
- */
-/*
- * The code contained herein is licensed under the GNU General Public
- * License. You may obtain a copy of the GNU General Public License
- * Version 2 or later at the following locations:
- *
- * http://www.opensource.org/licenses/gpl-license.html
- * http://www.gnu.org/copyleft/gpl.html
- */
+/****************************************************************************
+ ****************************************************************************
+ ***
+ ***   This header was automatically generated from a Linux kernel header
+ ***   of the same name, to make information necessary for userspace to
+ ***   call into the kernel available to libc.  It contains only constants,
+ ***   structures, and macros generated from the original header, and thus,
+ ***   contains no copyrightable information.
+ ***
+ ***   To edit the content of this header, modify the corresponding
+ ***   source file (e.g. under external/kernel-headers/original/) then
+ ***   run bionic/libc/kernel/tools/update_all.py
+ ***
+ ***   Any manual change here will be lost the next time this script will
+ ***   be run. You've been warned!
+ ***
+ ****************************************************************************
+ ****************************************************************************/
 #ifndef _LINUX_IR_H
 #define _LINUX_IR_H
-
 #include <linux/types.h>
-#ifdef __KERNEL__
-#include <linux/kgdb.h>
-#endif /* __KERNEL__ */
-
 #define IR_MAGIC 'I'
-
-#define IR_GET_CARRIER_FREQS		_IO(IR_MAGIC, 0x01)
-#define IR_GET_CARRIER_FREQS_NUM	_IO(IR_MAGIC, 0x02)
-#define IR_DATA_TRANSMIT		_IO(IR_MAGIC, 0x03)
-#define IR_CFG_CARRIER			_IO(IR_MAGIC, 0x04)
-
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define IR_GET_CARRIER_FREQS _IO(IR_MAGIC, 0x01)
+#define IR_GET_CARRIER_FREQS_NUM _IO(IR_MAGIC, 0x02)
+#define IR_DATA_TRANSMIT _IO(IR_MAGIC, 0x03)
+#define IR_CFG_CARRIER _IO(IR_MAGIC, 0x04)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct ir_data_pattern {
-	int len;
-	int *pattern;
+ int len;
+ int *pattern;
 };
-
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct ir_carrier_freq {
-	/* carrier frequence id */
-	int id;
-	/* ir support min carrier freq */
-	int min;
-	/* ir support max carrier freq */
-	int max;
+ int id;
+ int min;
+ int max;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
-#ifdef __KERNEL__
-extern void ir_device_register(const char *name, struct device *parent, void *devdata);
-extern void ir_device_unregister(void);
-extern int ir_config(void *dev, int carry_freq);
-extern int ir_get_num_carrier_freqs(void);
-extern int ir_get_carrier_range(int id,int *min, int *max);
-extern int ir_transmit(void *dev, int len,int *pattern,unsigned char start_level);
 #endif
-#endif /* _LINUX_IR_H */

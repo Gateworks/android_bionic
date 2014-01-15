@@ -19,7 +19,12 @@
 #ifndef _LINUX_HIGHMEM_H
 #define _LINUX_HIGHMEM_H
 #include <linux/fs.h>
+#include <linux/kernel.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/bug.h>
 #include <linux/mm.h>
+#include <linux/uaccess.h>
+#include <linux/hardirq.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #include <asm/cacheflush.h>
 #ifndef ARCH_HAS_FLUSH_ANON_PAGE
@@ -27,13 +32,23 @@
 #ifndef ARCH_HAS_FLUSH_KERNEL_DCACHE_PAGE
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
-#define kunmap(page) do { (void) (page); } while (0)
-#define kmap_atomic(page, idx) page_address(page)
-#define kunmap_atomic(addr, idx) do { } while (0)
+#include <asm/kmap_types.h>
+#define totalhigh_pages 0UL
+#ifndef ARCH_HAS_KMAP
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define kmap_atomic_pfn(pfn, idx) page_address(pfn_to_page(pfn))
+#define kmap_atomic_prot(page, prot) kmap_atomic(page)
+#define kmap_atomic_pfn(pfn) kmap_atomic(pfn_to_page(pfn))
 #define kmap_atomic_to_page(ptr) virt_to_page(ptr)
+#define kmap_flush_unused() do {} while(0)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#endif
+#define kunmap_atomic(addr)  do {   BUILD_BUG_ON(__same_type((addr), struct page *));   __kunmap_atomic(addr);  } while (0)
+#ifndef clear_user_highpage
+#endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #ifndef __HAVE_ARCH_ALLOC_ZEROED_USER_HIGHPAGE
+#endif
+#ifndef __HAVE_ARCH_COPY_USER_HIGHPAGE
 #endif
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif

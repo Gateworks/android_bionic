@@ -18,8 +18,24 @@
  ****************************************************************************/
 #ifndef __ASM_ARM_DELAY_H
 #define __ASM_ARM_DELAY_H
+#include <asm/memory.h>
 #include <asm/param.h>
-#define MAX_UDELAY_MS 2
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define udelay(n)   (__builtin_constant_p(n) ?   ((n) > (MAX_UDELAY_MS * 1000) ? __bad_udelay() :   __const_udelay((n) * ((2199023U*HZ)>>11))) :   __udelay(n))
+#define MAX_UDELAY_MS 2
+#define UDELAY_MULT ((UL(2199023) * HZ) >> 11)
+#define UDELAY_SHIFT 30
+#ifndef __ASSEMBLY__
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct delay_timer {
+ unsigned long (*read_current_timer)(void);
+ unsigned long freq;
+};
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define __delay(n) arm_delay_ops.delay(n)
+#define __udelay(n) arm_delay_ops.udelay(n)
+#define __const_udelay(n) arm_delay_ops.const_udelay(n)
+#define udelay(n)   (__builtin_constant_p(n) ?   ((n) > (MAX_UDELAY_MS * 1000) ? __bad_udelay() :   __const_udelay((n) * UDELAY_MULT)) :   __udelay(n))
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define ARCH_HAS_READ_CURRENT_TIMER
+#endif
 #endif

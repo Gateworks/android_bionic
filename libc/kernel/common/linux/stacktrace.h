@@ -18,7 +18,12 @@
  ****************************************************************************/
 #ifndef __LINUX_STACKTRACE_H
 #define __LINUX_STACKTRACE_H
-#define save_stack_trace(trace, task, all, skip) do { } while (0)
-#define print_stack_trace(trace) do { } while (0)
+struct task_struct;
+struct pt_regs;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define save_stack_trace(trace) do { } while (0)
+#define save_stack_trace_tsk(tsk, trace) do { } while (0)
+#define save_stack_trace_user(trace) do { } while (0)
+#define print_stack_trace(trace, spaces) do { } while (0)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif

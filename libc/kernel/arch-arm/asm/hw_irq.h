@@ -18,6 +18,9 @@
  ****************************************************************************/
 #ifndef _ARCH_ARM_HW_IRQ_H
 #define _ARCH_ARM_HW_IRQ_H
-#include <asm/mach/irq.h>
-#endif
+#define IRQF_VALID (1 << 0)
+#define IRQF_PROBE (1 << 1)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define IRQF_NOAUTOEN (1 << 2)
+#define ARCH_IRQ_INIT_FLAGS (IRQ_NOREQUEST | IRQ_NOPROBE)
+#endif

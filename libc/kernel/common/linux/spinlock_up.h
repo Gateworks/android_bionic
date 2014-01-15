@@ -22,13 +22,17 @@
 #error "please don't include this file directly"
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
-#define __raw_spin_is_locked(lock) ((void)(lock), 0)
-#define __raw_spin_lock(lock) do { (void)(lock); } while (0)
-#define __raw_spin_unlock(lock) do { (void)(lock); } while (0)
+#include <asm/processor.h>
+#define arch_spin_is_locked(lock) ((void)(lock), 0)
+#define arch_spin_lock(lock) do { barrier(); (void)(lock); } while (0)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define __raw_spin_trylock(lock) ({ (void)(lock); 1; })
-#define __raw_read_can_lock(lock) (((void)(lock), 1))
-#define __raw_write_can_lock(lock) (((void)(lock), 1))
-#define __raw_spin_unlock_wait(lock)   do { cpu_relax(); } while (__raw_spin_is_locked(lock))
+#define arch_spin_lock_flags(lock, flags) do { barrier(); (void)(lock); } while (0)
+#define arch_spin_unlock(lock) do { barrier(); (void)(lock); } while (0)
+#define arch_spin_trylock(lock) ({ barrier(); (void)(lock); 1; })
+#define arch_spin_is_contended(lock) (((void)(lock), 0))
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define arch_read_can_lock(lock) (((void)(lock), 1))
+#define arch_write_can_lock(lock) (((void)(lock), 1))
+#define arch_spin_unlock_wait(lock)   do { cpu_relax(); } while (arch_spin_is_locked(lock))
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

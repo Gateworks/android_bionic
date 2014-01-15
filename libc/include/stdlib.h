@@ -74,7 +74,7 @@ extern long long atoll(const char *) __purefunc;
 
 static __inline__ double atof(const char *nptr)
 {
-    return (strtod(nptr, NULL));
+    return (strtod(nptr, (char **)NULL));
 }
 
 extern int abs(int) __pure2;

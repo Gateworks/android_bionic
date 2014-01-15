@@ -21,11 +21,13 @@
 #include <linux/spinlock.h>
 #include <linux/smp.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/list.h>
 #include <linux/threads.h>
 #include <linux/percpu.h>
 #include <linux/types.h>
-struct percpu_counter {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct percpu_counter {
  s64 count;
 };
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

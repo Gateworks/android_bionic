@@ -18,4 +18,9 @@
  ****************************************************************************/
 #ifndef __ASM_MEMORY_MODEL_H
 #define __ASM_MEMORY_MODEL_H
+#ifndef __ASSEMBLY__
+#define page_to_pfn __page_to_pfn
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define pfn_to_page __pfn_to_page
+#endif
 #endif

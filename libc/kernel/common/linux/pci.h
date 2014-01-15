@@ -18,17 +18,24 @@
  ****************************************************************************/
 #ifndef LINUX_PCI_H
 #define LINUX_PCI_H
-#include <linux/pci_regs.h>
+#include <linux/mod_devicetable.h>
+#include <linux/types.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/init.h>
+#include <linux/ioport.h>
+#include <linux/list.h>
+#include <linux/compiler.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/errno.h>
+#include <linux/kobject.h>
+#include <linux/atomic.h>
+#include <linux/device.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/io.h>
+#include <linux/irqreturn.h>
+#include <uapi/linux/pci.h>
 #include <linux/pci_ids.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define PCI_DEVFN(slot,func) ((((slot) & 0x1f) << 3) | ((func) & 0x07))
-#define PCI_SLOT(devfn) (((devfn) >> 3) & 0x1f)
-#define PCI_FUNC(devfn) ((devfn) & 0x07)
-#define PCIIOC_BASE ('P' << 24 | 'C' << 16 | 'I' << 8)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define PCIIOC_CONTROLLER (PCIIOC_BASE | 0x00)
-#define PCIIOC_MMAP_IS_IO (PCIIOC_BASE | 0x01)
-#define PCIIOC_MMAP_IS_MEM (PCIIOC_BASE | 0x02)
-#define PCIIOC_WRITE_COMBINE (PCIIOC_BASE | 0x03)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define PCI_DEVID(bus, devfn) ((((u16)bus) << 8) | devfn)
+#define PCI_BUS_NUM(x) (((x) >> 8) & 0xff)
 #endif

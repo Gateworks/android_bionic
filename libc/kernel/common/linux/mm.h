@@ -18,8 +18,6 @@
  ****************************************************************************/
 #ifndef _LINUX_MM_H
 #define _LINUX_MM_H
-#include <linux/sched.h>
 #include <linux/errno.h>
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#include <linux/capability.h>
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

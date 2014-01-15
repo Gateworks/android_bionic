@@ -18,28 +18,13 @@
  ****************************************************************************/
 #ifndef __ASM_GENERIC_SIGNAL_H
 #define __ASM_GENERIC_SIGNAL_H
-#include <linux/compiler.h>
-#ifndef SIG_BLOCK
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define SIG_BLOCK 0
-#endif
-#ifndef SIG_UNBLOCK
-#define SIG_UNBLOCK 1
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#endif
-#ifndef SIG_SETMASK
-#define SIG_SETMASK 2
-#endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <uapi/asm-generic/signal.h>
 #ifndef __ASSEMBLY__
-typedef void __signalfn_t(int);
-typedef __signalfn_t __user *__sighandler_t;
-typedef void __restorefn_t(void);
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-typedef __restorefn_t __user *__sigrestore_t;
-#define SIG_DFL ((__force __sighandler_t)0)
-#define SIG_IGN ((__force __sighandler_t)1)
-#define SIG_ERR ((__force __sighandler_t)-1)
+#ifdef SA_RESTORER
+#endif
+#include <asm/sigcontext.h>
+#undef __HAVE_ARCH_SIG_BITOPS
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
 #endif

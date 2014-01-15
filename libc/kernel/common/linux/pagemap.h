@@ -27,8 +27,18 @@
 #include <asm/uaccess.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #include <linux/gfp.h>
-#define AS_EIO (__GFP_BITS_SHIFT + 0)
-#define AS_ENOSPC (__GFP_BITS_SHIFT + 1)
+#include <linux/bitops.h>
+#include <linux/hardirq.h>
+#include <linux/hugetlb_inline.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+enum mapping_flags {
+ AS_EIO = __GFP_BITS_SHIFT + 0,
+ AS_ENOSPC = __GFP_BITS_SHIFT + 1,
+ AS_MM_ALL_LOCKS = __GFP_BITS_SHIFT + 2,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ AS_UNEVICTABLE = __GFP_BITS_SHIFT + 3,
+ AS_BALLOON_MAP = __GFP_BITS_SHIFT + 4,
+};
 #define PAGE_CACHE_SHIFT PAGE_SHIFT
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define PAGE_CACHE_SIZE PAGE_SIZE
@@ -38,4 +48,7 @@
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define page_cache_release(page) put_page(page)
 typedef int filler_t(void *, struct page *);
+struct page *grab_cache_page_write_begin(struct address_space *mapping,
+ pgoff_t index, unsigned flags);
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif

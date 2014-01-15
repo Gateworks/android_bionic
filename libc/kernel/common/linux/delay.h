@@ -18,17 +18,18 @@
  ****************************************************************************/
 #ifndef _LINUX_DELAY_H
 #define _LINUX_DELAY_H
+#include <linux/kernel.h>
 #include <asm/delay.h>
-#ifndef MAX_UDELAY_MS
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#ifndef MAX_UDELAY_MS
 #define MAX_UDELAY_MS 5
 #endif
 #ifndef mdelay
-#define mdelay(n) (  (__builtin_constant_p(n) && (n)<=MAX_UDELAY_MS) ? udelay((n)*1000) :   ({unsigned long __ms=(n); while (__ms--) udelay(1000);}))
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define mdelay(n) (  (__builtin_constant_p(n) && (n)<=MAX_UDELAY_MS) ? udelay((n)*1000) :   ({unsigned long __ms=(n); while (__ms--) udelay(1000);}))
 #endif
 #ifndef ndelay
-#define ndelay(x) udelay(((x)+999)/1000)
-#endif
+#define ndelay(x) ndelay(x)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#endif
 #endif

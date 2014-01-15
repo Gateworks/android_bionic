@@ -18,73 +18,74 @@
  ****************************************************************************/
 #ifndef _LINUX_LOOP_H
 #define _LINUX_LOOP_H
-#define LO_NAME_SIZE 64
-#define LO_KEY_SIZE 32
+#include <linux/bio.h>
+#include <linux/blkdev.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <linux/spinlock.h>
+#include <linux/mutex.h>
+#include <uapi/linux/loop.h>
 enum {
- LO_FLAGS_READ_ONLY = 1,
- LO_FLAGS_USE_AOPS = 2,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ Lo_unbound,
+ Lo_bound,
+ Lo_rundown,
 };
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#include <asm/posix_types.h>
-#include <asm/types.h>
-struct loop_info {
+struct loop_func_table;
+struct loop_device {
  int lo_number;
+ int lo_refcnt;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- __kernel_old_dev_t lo_device;
- unsigned long lo_inode;
- __kernel_old_dev_t lo_rdevice;
- int lo_offset;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int lo_encrypt_type;
- int lo_encrypt_key_size;
+ loff_t lo_offset;
+ loff_t lo_sizelimit;
  int lo_flags;
- char lo_name[LO_NAME_SIZE];
+ int (*transfer)(struct loop_device *, int cmd,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned char lo_encrypt_key[LO_KEY_SIZE];
- unsigned long lo_init[2];
- char reserved[4];
+ struct page *raw_page, unsigned raw_off,
+ struct page *loop_page, unsigned loop_off,
+ int size, sector_t real_block);
+ char lo_file_name[LO_NAME_SIZE];
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ char lo_crypt_name[LO_NAME_SIZE];
+ char lo_encrypt_key[LO_KEY_SIZE];
+ int lo_encrypt_key_size;
+ struct loop_func_table *lo_encryption;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ __u32 lo_init[2];
+ kuid_t lo_key_owner;
+ int (*ioctl)(struct loop_device *, int cmd,
+ unsigned long arg);
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct file * lo_backing_file;
+ struct block_device *lo_device;
+ unsigned lo_blocksize;
+ void *key_data;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ gfp_t old_gfp_mask;
+ spinlock_t lo_lock;
+ unsigned int lo_bio_count;
+ int lo_state;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct mutex lo_ctl_mutex;
+ struct task_struct *lo_thread;
+ wait_queue_head_t lo_event;
+ wait_queue_head_t lo_req_wait;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct request_queue *lo_queue;
+ struct gendisk *lo_disk;
 };
+struct loop_func_table {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct loop_info64 {
- __u64 lo_device;
- __u64 lo_inode;
- __u64 lo_rdevice;
+ int number;
+ int (*transfer)(struct loop_device *lo, int cmd,
+ struct page *raw_page, unsigned raw_off,
+ struct page *loop_page, unsigned loop_off,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- __u64 lo_offset;
- __u64 lo_sizelimit;
- __u32 lo_number;
- __u32 lo_encrypt_type;
+ int size, sector_t real_block);
+ int (*init)(struct loop_device *, const struct loop_info64 *);
+ int (*release)(struct loop_device *);
+ int (*ioctl)(struct loop_device *, int cmd, unsigned long arg);
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- __u32 lo_encrypt_key_size;
- __u32 lo_flags;
- __u8 lo_file_name[LO_NAME_SIZE];
- __u8 lo_crypt_name[LO_NAME_SIZE];
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- __u8 lo_encrypt_key[LO_KEY_SIZE];
- __u64 lo_init[2];
+ struct module *owner;
 };
-#define LO_CRYPT_NONE 0
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define LO_CRYPT_XOR 1
-#define LO_CRYPT_DES 2
-#define LO_CRYPT_FISH2 3
-#define LO_CRYPT_BLOW 4
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define LO_CRYPT_CAST128 5
-#define LO_CRYPT_IDEA 6
-#define LO_CRYPT_DUMMY 9
-#define LO_CRYPT_SKIPJACK 10
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define LO_CRYPT_CRYPTOAPI 18
-#define MAX_LO_CRYPT 20
-#define LOOP_SET_FD 0x4C00
-#define LOOP_CLR_FD 0x4C01
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define LOOP_SET_STATUS 0x4C02
-#define LOOP_GET_STATUS 0x4C03
-#define LOOP_SET_STATUS64 0x4C04
-#define LOOP_GET_STATUS64 0x4C05
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define LOOP_CHANGE_FD 0x4C06
 #endif

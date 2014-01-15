@@ -18,11 +18,11 @@
  ****************************************************************************/
 #ifndef _IPT_AH_H
 #define _IPT_AH_H
-struct ipt_ah
-{
+#include <linux/types.h>
+struct ipt_ah {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- u_int32_t spis[2];
- u_int8_t invflags;
+ __u32 spis[2];
+ __u8 invflags;
 };
 #define IPT_AH_INV_SPI 0x01
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

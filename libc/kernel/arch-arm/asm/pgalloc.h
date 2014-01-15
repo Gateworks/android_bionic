@@ -18,12 +18,13 @@
  ****************************************************************************/
 #ifndef _ASMARM_PGALLOC_H
 #define _ASMARM_PGALLOC_H
+#include <linux/pagemap.h>
 #include <asm/domain.h>
-#include <asm/pgtable-hwdef.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <asm/pgtable-hwdef.h>
 #include <asm/processor.h>
 #include <asm/cacheflush.h>
 #include <asm/tlbflush.h>
-#define check_pgt_cache() do { } while (0)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define check_pgt_cache() do { } while (0)
 #endif

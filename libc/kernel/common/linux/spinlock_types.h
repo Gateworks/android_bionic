@@ -18,28 +18,31 @@
  ****************************************************************************/
 #ifndef __LINUX_SPINLOCK_TYPES_H
 #define __LINUX_SPINLOCK_TYPES_H
-#include <linux/lockdep.h>
 #include <linux/spinlock_types_up.h>
+#include <linux/lockdep.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-typedef struct {
- raw_spinlock_t raw_lock;
-} spinlock_t;
+typedef struct raw_spinlock {
+ arch_spinlock_t raw_lock;
+} raw_spinlock_t;
 #define SPINLOCK_MAGIC 0xdead4ead
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-typedef struct {
- raw_rwlock_t raw_lock;
-} rwlock_t;
-#define RWLOCK_MAGIC 0xdeaf1eed
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define SPINLOCK_OWNER_INIT ((void *)-1L)
 #define SPIN_DEP_MAP_INIT(lockname)
-#define RW_DEP_MAP_INIT(lockname)
-#define __SPIN_LOCK_UNLOCKED(lockname)   (spinlock_t) { .raw_lock = __RAW_SPIN_LOCK_UNLOCKED,   SPIN_DEP_MAP_INIT(lockname) }
+#define SPIN_DEBUG_INIT(lockname)
+#define __RAW_SPIN_LOCK_INITIALIZER(lockname)   {   .raw_lock = __ARCH_SPIN_LOCK_UNLOCKED,   SPIN_DEBUG_INIT(lockname)   SPIN_DEP_MAP_INIT(lockname) }
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define __RW_LOCK_UNLOCKED(lockname)   (rwlock_t) { .raw_lock = __RAW_RW_LOCK_UNLOCKED,   RW_DEP_MAP_INIT(lockname) }
-#define SPIN_LOCK_UNLOCKED __SPIN_LOCK_UNLOCKED(old_style_spin_init)
-#define RW_LOCK_UNLOCKED __RW_LOCK_UNLOCKED(old_style_rw_init)
+#define __RAW_SPIN_LOCK_UNLOCKED(lockname)   (raw_spinlock_t) __RAW_SPIN_LOCK_INITIALIZER(lockname)
+#define DEFINE_RAW_SPINLOCK(x) raw_spinlock_t x = __RAW_SPIN_LOCK_UNLOCKED(x)
+typedef struct spinlock {
+ union {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct raw_spinlock rlock;
+ };
+} spinlock_t;
+#define __SPIN_LOCK_INITIALIZER(lockname)   { { .rlock = __RAW_SPIN_LOCK_INITIALIZER(lockname) } }
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define __SPIN_LOCK_UNLOCKED(lockname)   (spinlock_t ) __SPIN_LOCK_INITIALIZER(lockname)
 #define DEFINE_SPINLOCK(x) spinlock_t x = __SPIN_LOCK_UNLOCKED(x)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define DEFINE_RWLOCK(x) rwlock_t x = __RW_LOCK_UNLOCKED(x)
+#include <linux/rwlock_types.h>
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

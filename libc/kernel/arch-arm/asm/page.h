@@ -19,7 +19,16 @@
 #ifndef _ASMARM_PAGE_H
 #define _ASMARM_PAGE_H
 #define PAGE_SHIFT 12
-#define PAGE_SIZE (1UL << PAGE_SHIFT)
+#define PAGE_SIZE (_AC(1,UL) << PAGE_SHIFT)
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define PAGE_MASK (~(PAGE_SIZE-1))
+#ifndef __ASSEMBLY__
+#include <asm/page-nommu.h>
+typedef struct page *pgtable_t;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#include <asm/memory.h>
+#endif
+#define VM_DATA_DEFAULT_FLAGS   (((current->personality & READ_IMPLIES_EXEC) ? VM_EXEC : 0) |   VM_READ | VM_WRITE | VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC)
+#include <asm-generic/getorder.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif

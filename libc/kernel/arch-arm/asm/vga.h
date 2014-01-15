@@ -18,11 +18,9 @@
  ****************************************************************************/
 #ifndef ASMARM_VGA_H
 #define ASMARM_VGA_H
-#include <asm/hardware.h>
-#include <asm/io.h>
+#include <linux/io.h>
+#define VGA_MAP_MEM(x,s) (vga_base + (x))
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define VGA_MAP_MEM(x,s) (PCIMEM_BASE + (x))
 #define vga_readb(x) (*((volatile unsigned char *)x))
 #define vga_writeb(x,y) (*((volatile unsigned char *)y) = (x))
 #endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

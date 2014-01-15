@@ -18,24 +18,22 @@
  ****************************************************************************/
 #ifndef _ATTRIBUTE_CONTAINER_H_
 #define _ATTRIBUTE_CONTAINER_H_
-#include <linux/device.h>
 #include <linux/list.h>
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #include <linux/klist.h>
-#include <linux/spinlock.h>
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+struct device;
 struct attribute_container {
- struct list_head node;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  struct klist containers;
- struct class *class;
- struct class_device_attribute **attrs;
- int (*match)(struct attribute_container *, struct device *);
+ const struct attribute_group *grp;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct device_attribute **attrs;
+ int (*match)(struct attribute_container *, struct device *);
 #define ATTRIBUTE_CONTAINER_NO_CLASSDEVS 0x01
  unsigned long flags;
-};
-struct attribute_container *attribute_container_classdev_to_container(struct class_device *);
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct class_device *attribute_container_find_class_device(struct attribute_container *, struct device *);
-struct class_device_attribute **attribute_container_classdev_to_attrs(const struct class_device *classdev);
+};
+struct attribute_container *attribute_container_classdev_to_container(struct device *);
+struct device *attribute_container_find_class_device(struct attribute_container *, struct device *);
+struct device_attribute **attribute_container_classdev_to_attrs(const struct device *classdev);
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif

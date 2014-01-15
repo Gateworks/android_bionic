@@ -22,12 +22,25 @@
 #error SMP not supported on pre-ARMv6 CPUs
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
-#define __raw_spin_is_locked(x) ((x)->lock != 0)
-#define __raw_spin_unlock_wait(lock)   do { while (__raw_spin_is_locked(lock)) cpu_relax(); } while (0)
-#define __raw_spin_lock_flags(lock, flags) __raw_spin_lock(lock)
+#include <asm/processor.h>
+#define ALT_SMP(smp, up)   "9998:	" smp "\n"   "	.pushsection \".alt.smp.init\", \"a\"\n"   "	.long	9998b\n"   "	" up "\n"   "	.popsection\n"
+#define SEV ALT_SMP("sev", "nop")
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define rwlock_is_locked(x) (*((volatile unsigned int *)(x)) != 0)
-#define __raw_write_can_lock(x) ((x)->lock == 0x80000000)
-#define __raw_read_can_lock(x) ((x)->lock < 0x80000000)
+#define WFE(cond) ALT_SMP("wfe" cond, "nop")
+#if __LINUX_ARM_ARCH__ >= 7
+#else
 #endif
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define arch_spin_unlock_wait(lock)   do { while (arch_spin_is_locked(lock)) cpu_relax(); } while (0)
+#define arch_spin_lock_flags(lock, flags) arch_spin_lock(lock)
+#define arch_spin_is_contended arch_spin_is_contended
+#define arch_write_can_lock(x) ((x)->lock == 0)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define arch_read_can_lock(x) ((x)->lock < 0x80000000)
+#define arch_read_lock_flags(lock, flags) arch_read_lock(lock)
+#define arch_write_lock_flags(lock, flags) arch_write_lock(lock)
+#define arch_spin_relax(lock) cpu_relax()
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#define arch_read_relax(lock) cpu_relax()
+#define arch_write_relax(lock) cpu_relax()
+#endif

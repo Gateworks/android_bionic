@@ -18,16 +18,11 @@
  ****************************************************************************/
 #ifndef __LINUX_UIO_H
 #define __LINUX_UIO_H
-#include <linux/compiler.h>
-#include <linux/types.h>
+#include <uapi/linux/uio.h>
+struct kvec {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct iovec
-{
- void __user *iov_base;
- __kernel_size_t iov_len;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ void *iov_base;
+ size_t iov_len;
 };
-#define UIO_FASTIOV 8
-#define UIO_MAXIOV 1024
 #endif
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

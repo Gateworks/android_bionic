@@ -18,19 +18,18 @@
  ****************************************************************************/
 #ifndef _LINUX_MEMPOLICY_H
 #define _LINUX_MEMPOLICY_H 1
-#include <linux/errno.h>
-#define MPOL_DEFAULT 0
+#include <linux/mmzone.h>
+#include <linux/slab.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define MPOL_PREFERRED 1
-#define MPOL_BIND 2
-#define MPOL_INTERLEAVE 3
-#define MPOL_MAX MPOL_INTERLEAVE
+#include <linux/spinlock.h>
+#include <linux/nodemask.h>
+#include <linux/pagemap.h>
+#include <uapi/linux/mempolicy.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define MPOL_F_NODE (1<<0)
-#define MPOL_F_ADDR (1<<1)
-#define MPOL_MF_STRICT (1<<0)
-#define MPOL_MF_MOVE (1<<1)
+struct mm_struct;
+struct mempolicy {};
+struct shared_policy {};
+#define vma_policy(vma) NULL
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define MPOL_MF_MOVE_ALL (1<<2)
-#define MPOL_MF_INTERNAL (1<<3)
+#define vma_set_policy(vma, pol) do {} while(0)
 #endif

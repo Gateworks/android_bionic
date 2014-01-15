@@ -19,15 +19,8 @@
 #ifndef _LINUX_SW_SYNC_H
 #define _LINUX_SW_SYNC_H
 #include <linux/types.h>
-struct sw_sync_create_fence_data {
+#include <linux/kconfig.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- __u32 value;
- char name[32];
- __s32 fence;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define SW_SYNC_IOC_MAGIC 'W'
-#define SW_SYNC_IOC_CREATE_FENCE _IOWR(SW_SYNC_IOC_MAGIC, 0,  struct sw_sync_create_fence_data)
-#define SW_SYNC_IOC_INC _IOW(SW_SYNC_IOC_MAGIC, 1, __u32)
+#include "sync.h"
+#include "uapi/sw_sync.h"
 #endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

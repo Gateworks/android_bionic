@@ -18,17 +18,22 @@
  ****************************************************************************/
 #ifndef __LINUX__AIO_ABI_H
 #define __LINUX__AIO_ABI_H
+#include <linux/types.h>
 #include <asm/byteorder.h>
-typedef unsigned long aio_context_t;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+typedef __kernel_ulong_t aio_context_t;
 enum {
  IOCB_CMD_PREAD = 0,
  IOCB_CMD_PWRITE = 1,
- IOCB_CMD_FSYNC = 2,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ IOCB_CMD_FSYNC = 2,
  IOCB_CMD_FDSYNC = 3,
  IOCB_CMD_NOOP = 6,
+ IOCB_CMD_PREADV = 7,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ IOCB_CMD_PWRITEV = 8,
 };
+#define IOCB_FLAG_RESFD (1 << 0)
 struct io_event {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  __u64 data;
@@ -58,9 +63,11 @@ struct iocb {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  __s64 aio_offset;
  __u64 aio_reserved2;
- __u64 aio_reserved3;
-};
+ __u32 aio_flags;
+ __u32 aio_resfd;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+};
 #undef IFBIG
 #undef IFLITTLE
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

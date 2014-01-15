@@ -47,10 +47,12 @@
 #define POLLRDHUP 0x2000
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
+#define POLLFREE 0x4000
 struct pollfd {
  int fd;
- short events;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ short events;
  short revents;
 };
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

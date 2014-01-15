@@ -16,6 +16,6 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef _ASMARM_SUSPEND_H
-#define _ASMARM_SUSPEND_H
+#ifndef __ASM_ARM_SUSPEND_H
+#define __ASM_ARM_SUSPEND_H
 #endif

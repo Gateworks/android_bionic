@@ -22,22 +22,13 @@
 #include <linux/threads.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #include <asm/irq.h>
-typedef struct {
- unsigned int __softirq_pending;
- unsigned int local_timer_irqs;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-} ____cacheline_aligned irq_cpustat_t;
+#define NR_IPI 7
 #include <linux/irq_cpustat.h>
-#if NR_IRQS > 256
-#define HARDIRQ_BITS 9
+#define __inc_irq_stat(cpu, member) __IRQ_STAT(cpu, member)++
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#else
-#define HARDIRQ_BITS 8
-#endif
-#if 1 << HARDIRQ_BITS < NR_IRQS
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#error HARDIRQ_BITS is too low!
-#endif
+#define __get_irq_stat(cpu, member) __IRQ_STAT(cpu, member)
+#define smp_irq_stat_cpu(cpu) 0
+#define arch_irq_stat_cpu smp_irq_stat_cpu
 #define __ARCH_IRQ_EXIT_IRQS_DISABLED 1
-#endif
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+#endif

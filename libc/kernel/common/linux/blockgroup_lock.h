@@ -29,6 +29,5 @@ struct bgl_lock {
 struct blockgroup_lock {
  struct bgl_lock locks[NR_BG_LOCKS];
 };
-#define sb_bgl_lock(sb, block_group)   (&(sb)->s_blockgroup_lock.locks[(block_group) & (NR_BG_LOCKS-1)].lock)
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

@@ -18,18 +18,18 @@
  ****************************************************************************/
 #ifndef _IP6T_RT_H
 #define _IP6T_RT_H
+#include <linux/types.h>
 #define IP6T_RT_HOPS 16
-struct ip6t_rt
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-{
- u_int32_t rt_type;
- u_int32_t segsleft[2];
- u_int32_t hdrlen;
+struct ip6t_rt {
+ __u32 rt_type;
+ __u32 segsleft[2];
+ __u32 hdrlen;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- u_int8_t flags;
- u_int8_t invflags;
+ __u8 flags;
+ __u8 invflags;
  struct in6_addr addrs[IP6T_RT_HOPS];
- u_int8_t addrnr;
+ __u8 addrnr;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 #define IP6T_RT_TYP 0x01
