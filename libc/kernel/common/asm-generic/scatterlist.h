@@ -19,15 +19,7 @@
 #ifndef __ASM_GENERIC_SCATTERLIST_H
 #define __ASM_GENERIC_SCATTERLIST_H
 #include <linux/types.h>
-struct scatterlist {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned long page_link;
- unsigned int offset;
- unsigned int length;
- dma_addr_t dma_address;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-};
 #define sg_dma_address(sg) ((sg)->dma_address)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define sg_dma_len(sg) ((sg)->length)
 #endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

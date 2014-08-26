@@ -41,31 +41,6 @@ struct watchdog_ops {
  long (*ioctl)(struct watchdog_device *, unsigned int, unsigned long);
 };
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct watchdog_device {
- int id;
- struct cdev cdev;
- struct device *dev;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct device *parent;
- const struct watchdog_info *info;
- const struct watchdog_ops *ops;
- unsigned int bootstatus;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned int timeout;
- unsigned int min_timeout;
- unsigned int max_timeout;
- void *driver_data;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct mutex lock;
- unsigned long status;
-#define WDOG_ACTIVE 0
-#define WDOG_DEV_OPEN 1
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define WDOG_ALLOW_RELEASE 2
-#define WDOG_NO_WAY_OUT 3
-#define WDOG_UNREGISTERED 4
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define WATCHDOG_NOWAYOUT 0
 #define WATCHDOG_NOWAYOUT_INIT_STATUS 0
 #endif

@@ -73,16 +73,6 @@ struct data_chunk {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  size_t icg;
 };
-struct dma_interleaved_template {
- dma_addr_t src_start;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- dma_addr_t dst_start;
- enum dma_transfer_direction dir;
- size_t numf;
- size_t frame_size;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct data_chunk sgl[0];
-};
 enum dma_ctrl_flags {
  DMA_PREP_INTERRUPT = (1 << 0),
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

@@ -22,12 +22,7 @@
 #include <linux/cpumask.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #include <linux/workqueue.h>
-struct node {
- struct device dev;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct memory_block;
-typedef void (*node_registration_func_t)(struct node *);
 #define to_node(device) container_of(device, struct node, dev)
 #endif
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */

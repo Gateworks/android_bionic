@@ -32,23 +32,4 @@
 #include <linux/time.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #include <linux/uidgid.h>
-struct kstat {
- u64 ino;
- dev_t dev;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- umode_t mode;
- unsigned int nlink;
- kuid_t uid;
- kgid_t gid;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- dev_t rdev;
- loff_t size;
- struct timespec atime;
- struct timespec mtime;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct timespec ctime;
- unsigned long blksize;
- unsigned long long blocks;
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
